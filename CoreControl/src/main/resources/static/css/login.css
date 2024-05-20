@@ -1,0 +1,67 @@
+body {
+    background-image: url("../img/background.webp");
+    color: var(--neutral-white);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.login_container {
+    background-color: var(--primary-color-2);
+    padding: 2rem .5rem;
+    border-radius: 30px;
+    width: 80%;
+    max-width: 350px;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.form_container {
+    width: 80%;
+}
+
+.logo_container {
+    height: 20%;
+    max-height: 100px;
+    width: 50px;
+}
+
+#login_form {
+    gap: 2rem;
+}
+
+.input_container > p {
+    margin-bottom: .5rem;
+}
+
+/* Select the inputs inside the input_container that are not checkbox */
+.input_container > input:not([type="checkbox"]) {
+    width: 100%;
+    padding: .5rem;
+    border-radius: 5px;
+    border: none;
+}
+
+#login-btn {
+    background-color: var(--neutral-black);
+    color: var(--neutral-white);
+    padding: .5rem;
+    border-radius: 8px;
+    border: 1px inset transparent;
+    outline: none;
+    transition: all .3s;
+}
+
+#login-btn:hover {
+    background-color: var(--primary-color);
+}
+
+#login-btn:active {
+    background-color: var(--primary-color-2);
+    border: 1px inset var(--neutral-white);
+}
