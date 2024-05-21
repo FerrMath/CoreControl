@@ -1,5 +1,27 @@
-<header th:fragment="header">
+<header th:fragment="header" class="flex">
     <th:block th:fragment="header">
-        <h1>header</h1>
+        <nav>
+            <div class="nav_container hider_container">
+                <i class="fa-solid fa-bars hiden_container_btn"></i>
+                <ul class="nav_links hidden flex column">
+                    <li><a href="/">Tela inicial</a></li>
+                    <li><a href="/">Adicionar produto</a></li>
+                    <li><a href="/">Gerenciar produtos</a></li>
+                    <li><a href="/">Relatórios</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="logo_container">
+            <img th:src="@{/img/logo.png}" alt="main logo">
+        </div>
+        <div class="user_container hider_container">
+            <i class="fa-solid fa-user hiden_container_btn"></i>
+            <div class="user_nav hidden flex column">
+                <p>Olá, <span>User</span>!</p>
+                <a href="/">Perfil</a>
+                <a href="/">Configurações</a>
+                <a th:href="@{/login}">Logout</a>
+            </div>
+        </div>
     </th:block>
 </header>

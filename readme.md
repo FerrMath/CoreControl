@@ -36,10 +36,9 @@ Simplificar o controle de inventário de produtos com acompanhamento de entrada,
 ## Tecnologias usadas
 
 * **Front End**: Thymeleaf e JavaScript.
-* **Back End**: Spring Boot.
+* **Back End**: Spring Boot e Hibernate.
 * **Banco de dados**: MySQL.
 
 ### Time de desenvolvedores
 
 * Matheus Alcantara
-
