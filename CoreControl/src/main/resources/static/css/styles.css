@@ -7,14 +7,17 @@
     --secondary-color-2: #4A4A4A;
     --acent-color: #2ECC71;
     --warning-color: #F39C12;
-    --error-color: #E74C3C;
+    --error-color: #d5220e;
     --neutral-white: #FFFFFF;
     --neutral-black: #000000;
 
+    --padding-0-5: .5rem;
     --padding-1: 1rem;
     --padding-1-5: 1.5rem;
     --padding-2: 2rem;
     --padding-3: 3rem;
+
+    --radius-8: 8px;
 
     margin: 0;
     padding: 0;
@@ -67,13 +70,13 @@ header {
 .nav_links {
     left: 0%;
     transform: translateY(calc(53% - --padding-1-5));
-    border-bottom-right-radius: 8px;
+    border-bottom-right-radius: var(--radius-8);
 }
 
 .user_nav {
     right: 0%;
     transform: translateY(calc(40% - --padding-1-5));
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: var(--radius-8);
 }
 
 .user_nav p {
@@ -122,8 +125,6 @@ grid-template-columns: 1fr 1fr 2fr;
     /* grid-column-end: 6; */
 }
 
-
-
 .notification-card {
     background-color: var(--secondary-color);
     justify-content: space-around;
@@ -161,8 +162,77 @@ grid-template-columns: 1fr 1fr 2fr;
 .need-to-rename-later > .notification_text > h3 {
     text-align: start;
 }
+/* ******************* */
+/* Product form styles */
+/* ******************* */
 
+.form-container {
+    width: 100%;
+    max-width: 700px;
+    margin-inline: auto;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    padding: var(--padding-0-5);
+}
+
+.input-container {
+    gap: .5rem;
+    width: 100%;
+}
+
+textarea#description{
+    resize: none;
+}
+
+.input-container > label {
+    font-weight: 500;
+}
+
+.input-container > input,
+.input-container > select,
+.input-container > textarea {
+    width: 100%;
+    padding: var(--padding-0-5);
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+}
+
+.input-container > input:focus,
+.input-container > select:focus,
+.input-container > textarea:focus {
+    outline: none;
+    border: 2px solid var(--primary-color);
+}
+
+.input-container > input:disabled {
+    background-color: var(--secondary-color);
+    color: var(--secondary-color-2);
+    cursor: not-allowed;
+}
+
+.button-row {
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: var(--padding-1);
+    border: none;
+    border-radius: var(--radius-8);
+    cursor: pointer;
+    color: var(--neutral-white);
+    background-color: var(--neutral-black);
+}
+
+.btn#cancel-btn {
+    background-color: var(--error-color);
+}
+
+/* ************* */
 /* Footer styles */
+/* ************* */
 
 footer {
     width: 75%;
