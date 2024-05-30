@@ -27,24 +27,92 @@
                     <p>There is 3 products that soon will reach the minimum amount.</p>
                 </div>
             </div>
-
-            <div class="need-to-rename-later notification-card middle-left">
+            <div class="report-history-container notification-card middle-left">
                 <!-- TODO modificar classe para nome coerente -->
-                <div class="notification_text">
-                    <h3>TODO</h3>
-                    <!-- TODO criar entradas com thymeleaf -->
-                    <p>There is X products reaching that are under the limit amount</p>
+                <h3>Report History</h3>
+                <div class="reports-container grid">
+                    <div class="reports-header flex">
+                        <span>Rep. Start date</span>
+                        <span>Rep. End date</span>
+                        <span>Download</span>
+                        <span>Info</span>
+                    </div>
+                    <div class="report">
+                        <span>01/01/2021</span>
+                        <span>01/02/2021</span>
+                        <span>
+                            <a href="#"><i class="fa-solid fa-download"></i></a>
+                        </span>
+                        <span>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </span>
+                    </div>
+                    <div class="report">
+                        <span>01/02/2021</span>
+                        <span>01/03/2021</span>
+                        <span>
+                            <a href="#"><i class="fa-solid fa-download"></i></a>
+                        </span>
+                        <span>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </span>
+                    </div>
+                    <div class="report">
+                        <span>01/03/2021</span>
+                        <span>01/04/2021</span>
+                        <span>
+                            <a href="#"><i class="fa-solid fa-download"></i></a>
+                        </span>
+                        <span>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </span>
+                    </div>
+
                 </div>
             </div>
-            <div class="notification-table notification-card top-right">
+            <div class="notifications-container notification-card top-right">
                 <!-- TODO criar entradas com thymeleaf -->
-                <h3>TODO</h3>
-                <div>Entrada temporaria</div>
-                <div>Entrada temporaria</div>
-                <div>Entrada temporaria</div>
-                <div>Entrada temporaria</div>
-                <div>Entrada temporaria</div>
-                <div>Entrada temporaria</div>
+                <h3>Real time updates</h3>
+                <div class="notifications-border">
+                    <div class="notifications">
+                        <div class="notification ">
+                            <p class="criou">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Produto X was created by Y at Z.</span>
+                            </p>
+                        </div>
+                        <div class="notification ">
+                            <p class="compra">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Product X was bought by Y at Z.</span>
+                            </p>
+                        </div>
+                        <div class="notification ">
+                            <p class="estoque">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Product X is running out of stock.</span>
+                            </p>
+                        </div>
+                        <div class="notification ">
+                            <p class="falta">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Product X is out of stock.</span>
+                            </p>
+                        </div>
+                        <div class="notification ">
+                            <p class="editou">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Product X was edited by Y.</span>
+                            </p>
+                        </div>
+                        <div class="notification ">
+                            <p class="venda">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>Produto X was sold by Y at Z.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

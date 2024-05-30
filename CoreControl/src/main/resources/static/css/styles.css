@@ -10,6 +10,9 @@
     --error-color: #d5220e;
     --neutral-white: #FFFFFF;
     --neutral-black: #000000;
+    --venda-color: #72dd9f;
+    --compra-color: #f1f113;
+
 
     --padding-0-5: .5rem;
     --padding-1: 1rem;
@@ -114,15 +117,58 @@ grid-template-columns: 1fr 1fr 2fr;
     grid-area: middle-left;
 }
 
-.notification-table {
+.notifications-container {
     grid-row-start: 1;
     grid-row-end: 4;
     grid-column-start: 3;
-
-
-
-    overflow: auto;
+    overflow: hidden;
+    max-height: 500px;
     /* grid-column-end: 6; */
+}
+
+.notifications-container > h3 {
+    margin: 1rem;
+}
+
+.notifications-border {
+    height: 85%;
+    border-radius: var(--radius-8);
+    overflow: hidden;
+}
+
+.notifications {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5rem;
+    border-radius: var(border-radius-8);
+    max-height: 100%;
+    overflow: auto;
+    /* background-color: red; */
+}
+
+.notification {
+    padding: .1rem;
+}
+
+.venda > i {
+    color: var(--venda-color);
+}
+
+.compra > i {
+    color: var(--compra-color);
+}
+
+.estoque > i {
+    color: var(--warning-color);
+}
+
+.falta > i {
+    color: var(--error-color);
+}
+
+.editou > span,
+.criou > span {
+    font-weight: 500;
 }
 
 .notification-card {
@@ -134,14 +180,44 @@ grid-template-columns: 1fr 1fr 2fr;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.need-to-rename-later {
+.report-history-container {
     grid-row-start: 3;
     grid-row-end: 4;
     grid-column-start: 1;
     grid-column-end: 3;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.reports-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
     overflow: auto;
-    min-height: 200px;
-    max-height: 300px;
+    border-block: 1px solid var(--secondary-color-2);
+    padding: .2rem;
+}
+
+.reports-container::-webkit-scrollbar-track {
+    scrollbar-color: var(--secondary-color-2) transparent; /* Background of the scrollbar track */
+}
+
+
+.reports-header,
+.report {
+    display: flex;
+}
+
+.reports-header span, .report span {
+    flex: 1;
+    padding: var(--padding-0-5);
+    text-align: center;
+}
+
+.report:nth-child(even) {
+    background-color: var(--neutral-white);
 }
 
 .notification_icon_container{
@@ -159,7 +235,7 @@ grid-template-columns: 1fr 1fr 2fr;
     margin-bottom: .5rem;
 }
 
-.need-to-rename-later > .notification_text > h3 {
+.report-history-container > h3 {
     text-align: start;
 }
 /* ******************* */

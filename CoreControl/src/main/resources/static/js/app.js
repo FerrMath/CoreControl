@@ -10,7 +10,6 @@
         const hidden = document.querySelectorAll('.hiden_container_btn');
         hidden.forEach((element) => {
             let ele = element.nextElementSibling;
-            console.log(ele);
             element.addEventListener("click", () => {
                 ele.classList.toggle('hidden');
             });
@@ -23,10 +22,7 @@
         const priceSale = document.getElementById('priceSale');
 
         [priceElement, profitElement].forEach((element) => {
-            if (element === null) {
-                priceSale.value = '0.00';
-                return;
-            }
+            if (element === null) return;
 
             if (element.value === '') {
                 priceSale.value = '0.00';
