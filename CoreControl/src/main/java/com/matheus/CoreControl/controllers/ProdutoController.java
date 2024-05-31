@@ -18,7 +18,12 @@ public class ProdutoController {
     @PostMapping("/salvar")
     public String postMethodName(@RequestBody String entity) {
         System.out.println("Salvou com sucesso o produto");
-        return "redirect:/";
+        return "redirect:/"; // Redireciona para a página inicial temporariamente
+    }
+
+    @GetMapping("/")
+    public String listProducts() {
+        return "products-list";
     }
 
 }

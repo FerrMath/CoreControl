@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <th:block th:replace="~{fragments/head :: head(title='Products | CoreControl')}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+
+<body>
+    <!-- Header block from thymeleaf -->
+    <th:block th:replace="~{fragments/header :: header}"></th:block>
+    <main style="flex:1; gap: 1rem;">
+        <h2 class="list-title">Products</h2>
+        <div class="product-list-container flex column">
+            <div class="list-controls flex column">
+                <div class="search-container flex">
+                    <div class="search-bar">
+                        <select name="filter-type" id="filter-type">
+                            <option value="name" title="Filter by name">Name</option>
+                            <option value="category" title="Filter by category">Category</option>
+                            <option value="price" title="Filter by price lower or greater than:">Price</option>
+                            <option value="amount" title="Filter by amount lower or greater than:">Amount</option>
+                        </select>
+                        <input type="text" placeholder="Search for products">
+                    </div>
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <div class="add-product-container">
+                    <a th:href="@{/produtos/novo}" class="btn">Add product</a>
+                </div>
+            </div>
+            <div class="list-wraper">
+                <div class="list-header">
+                    <span>Id</span>
+                    <span>Name</span>
+                    <span>Price</span>
+                    <span>Profit(&percnt;)</span>
+                    <span>Amount</span>
+                    <span>Actions</span>
+                </div>
+                <div class="product-list">
+                    <div class="product-item">
+                        <span>1</span>
+                        <span>Product 1</span>
+                        <span>R$ 10,00</span>
+                        <span>10</span>
+                        <span>10</span>
+                        <div class="actions">
+                            <span><i class="fa-solid fa-pen-to-square"></i></span>
+                            <span><i class="fa-solid fa-trash"></i></span>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <span>2</span>
+                        <span>Product 2</span>
+                        <span>R$ 20,00</span>
+                        <span>20</span>
+                        <span>20</span>
+                        <div class="actions">
+                            <span><i class="fa-solid fa-pen-to-square"></i></span>
+                            <span><i class="fa-solid fa-trash"></i></span>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <span>3</span>
+                        <span>Product 3</span>
+                        <span>R$ 30,00</span>
+                        <span>30</span>
+                        <span>30</span>
+                        <div class="actions">
+                            <span><i class="fa-solid fa-pen-to-square"></i></span>
+                            <span><i class="fa-solid fa-trash"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer block from thymeleaf -->
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+
+</html>
