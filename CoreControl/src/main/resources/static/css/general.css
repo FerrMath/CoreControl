@@ -24,3 +24,25 @@ img {
 .grid{
     display: grid;
 }
+
+.wrapper-80 {
+    width: 80%;
+    margin-inline: auto;
+}
+
+.wrapper-90 {
+    width: 90%;
+    margin-inline: auto;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-0-5 {
+    gap: .5rem;
+}
+
+.align-flex-start {
+    align-content: flex-start;
+}

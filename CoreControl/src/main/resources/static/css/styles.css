@@ -294,7 +294,7 @@ textarea#description{
 }
 
 .btn {
-    padding: var(--padding-1);
+    padding: var(--padding-0-5) var(--padding-1);
     border: none;
     border-radius: var(--radius-8);
     cursor: pointer;
