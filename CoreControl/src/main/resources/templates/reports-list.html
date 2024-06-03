@@ -9,8 +9,11 @@
 
 <body>
     <th:block th:replace="~{fragments/header :: header}"></th:block>
-    <main style="flex:1; gap:1.5rem">
+    <main style="flex:1; gap:1.5rem;">
         <div class="wrapper-90">
+            <h1 class="top-h">
+                Reports
+            </h1>
             <div class="reports-control-panel-container">
                 <div class="reports-control-panel">
                     <form action="#" id="report-control-form" class="flex" method="get">
@@ -46,7 +49,7 @@
                             <div class="table-item">R$ 500,00</div>
                             <div class="table-item">R$ 500,00</div>
                             <div class="table-item table-row-controls">
-                                <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                                <a th:href="@{/reports/report/1}"><i class="fa-solid fa-circle-info"></i></a>
                                 <a href="#"><i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
@@ -57,7 +60,7 @@
                             <div class="table-item">R$ 500,00</div>
                             <div class="table-item">R$ 500,00</div>
                             <div class="table-item table-row-controls">
-                                <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                                <a th:href="@{/reports/report/1}"><i class="fa-solid fa-circle-info"></i></a>
                                 <a href="#"><i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
@@ -68,7 +71,7 @@
                             <div class="table-item">R$ 500,00</div>
                             <div class="table-item">R$ 500,00</div>
                             <div class="table-item table-row-controls">
-                                <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                                <a th:href="@{/reports/report/1}"><i class="fa-solid fa-circle-info"></i></a>
                                 <a href="#"><i class="fa-solid fa-download"></i></a>
                             </div>
                         </div>

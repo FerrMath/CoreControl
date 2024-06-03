@@ -1,0 +1,19 @@
+.report-info-filter-container {
+    width: 90%;
+    margin-block: 1.5rem;
+    background-color: var(--secondary-color);
+    padding: var(--padding-1);
+    border-radius: var(--radius-8);
+}
+
+#report-info-filter-form {
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#report-info-filter-form> .info-filters {
+    flex: 1;
+
+}

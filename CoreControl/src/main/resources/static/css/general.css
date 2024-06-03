@@ -46,3 +46,7 @@ img {
 .align-flex-start {
     align-content: flex-start;
 }
+
+.inline-auto {
+    margin-inline: auto;
+}

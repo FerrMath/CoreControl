@@ -11,4 +11,11 @@ public class ReportController {
     public String showReportList() {
         return "reports-list";
     }
+
+    // TODO Temporary route to show the report page
+    @GetMapping("/report/{id}")
+    public String showReport() {
+        return "report";
+    }
+
 }
