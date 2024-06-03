@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <th:block th:replace="~{fragments/head :: head(title='User x | CoreControl')}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/user.css}">
+</head>
+
+<body>
+    <th:block th:replace="~{fragments/header :: header}"></th:block>
+    <main style="flex:1;">
+        <div class="wrapper-90">
+            <h1 class="top-h">User X</h1>
+            <div class="user-info-container flex">
+                <div class="user-info">
+                    <div class="user-img inline-auto">
+                        <img src="https://placehold.co/300x300/blue/white" alt="Product image">
+                    </div>
+                    <div class="user-data">
+                        <div class="user-data-row">
+                            <span>Id:</span>
+                            <span>1</span>
+                        </div>
+                        <div class="user-data-row">
+                            <span>Nome:</span>
+                            <span>Usuário 1</span>
+                        </div>
+                        <div class="user-data-row">
+                            <span>User type:</span>
+                            <span>Admin</span>
+                        </div>
+                        <div class="user-data-row">
+                            <span>Email:</span>
+                            <span>User@email.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+
+</html>

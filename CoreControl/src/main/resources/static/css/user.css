@@ -1,0 +1,19 @@
+.user-info-container {
+    min-height: 40dvh;
+    justify-content: center;
+}
+
+.user-info {
+    padding: 1rem;
+    border: 1px solid var(--secondary-color-2);
+    background-color: var(--secondary-color);
+    border-radius: var(--radius-8);
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.user-info > .user-img {
+    width: 50%;
+    height: 50%;
+    margin-block-end: 2rem;
+}
