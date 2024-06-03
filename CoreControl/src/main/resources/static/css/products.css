@@ -1,0 +1,69 @@
+.list-title {
+    /* font-size: 20px; */
+    font-weight: bold;
+    margin-block: 2rem;
+    text-align: center;
+}
+
+.product-list-container {
+    width: 80%;
+    max-width: 900px;
+    margin-inline: auto;
+    align-items: center;
+}
+
+.table-controls {
+    /* background-color: red; */
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.add-product-container {
+    display: flex;
+    justify-content: center;
+}
+
+.table-controls > .search-container {
+    gap: 1rem;
+    align-items: center;
+}
+
+.table-controls > .search-container > .search-bar {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color-2);
+    overflow: hidden;
+}
+
+.table-controls > .search-container > .search-bar input,
+.table-controls > .search-container > button,
+.table-controls > .search-container > .search-bar select {
+    padding: var(--padding-0-5);
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background-color: transparent;
+}
+
+.table-controls > .search-container > .search-bar input {
+    border: 2px solid transparent;
+    border-left: 2px solid var(--primary-color-2);
+    padding-left: var(--padding-1);
+}
+
+.table-controls > .search-container > button {
+    background-color: var(--primary-color-2);
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.table-controls > .search-container > .search-bar input:focus {
+    outline: none;
+}
+.table-controls > .search-container > .search-bar select:focus {
+    outline: none;
+}

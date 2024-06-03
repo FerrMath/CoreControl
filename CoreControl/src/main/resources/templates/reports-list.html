@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <th:block th:replace="~{fragments/head :: head(title='Reports | CoreControl')}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/reports.css}">
+</head>
+
+<body>
+    <th:block th:replace="~{fragments/header :: header}"></th:block>
+    <main style="flex:1; gap:1.5rem">
+        <div class="wrapper-90">
+            <div class="reports-control-panel-container">
+                <div class="reports-control-panel">
+                    <form action="#" id="report-control-form" class="flex" method="get">
+                        <div class="form-group">
+                            <label for="startDate">Start date</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End date</label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Filter Reports" class="btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="reports-list-container">
+                <div class="report-table created-table">
+                    <div class="table-header">
+                        <div class="table-item">Start Date</div>
+                        <div class="table-item">End Date</div>
+                        <div class="table-item">Total Sales</div>
+                        <div class="table-item">Total Expenses</div>
+                        <div class="table-item">Total Profit</div>
+                        <div class="table-item">Controls</div>
+                    </div>
+                    <div class="table-body flex column">
+                        <div class="table-row">
+                            <div class="table-item">2021-01-01</div>
+                            <div class="table-item">2021-01-31</div>
+                            <div class="table-item">R$ 1000,00</div>
+                            <div class="table-item">R$ 500,00</div>
+                            <div class="table-item">R$ 500,00</div>
+                            <div class="table-item table-row-controls">
+                                <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                                <a href="#"><i class="fa-solid fa-download"></i></a>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-item">2021-01-01</div>
+                            <div class="table-item">2021-01-31</div>
+                            <div class="table-item">R$ 1000,00</div>
+                            <div class="table-item">R$ 500,00</div>
+                            <div class="table-item">R$ 500,00</div>
+                            <div class="table-item table-row-controls">
+                                <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                                <a href="#"><i class="fa-solid fa-download"></i></a>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-item">2021-01-01</div>
+                            <div class="table-item">2021-01-31</div>
+                            <div class="table-item">R$ 1000,00</div>
+                            <div class="table-item">R$ 500,00</div>
+                            <div class="table-item">R$ 500,00</div>
+                            <div class="table-item table-row-controls">
+                                <a href="#"><i class="fa-solid fa-circle-info"></i></a>
+                                <a href="#"><i class="fa-solid fa-download"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+
+</html>

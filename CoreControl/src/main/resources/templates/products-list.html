@@ -4,6 +4,7 @@
 <head>
     <th:block th:replace="~{fragments/head :: head(title='Products | CoreControl')}"></th:block>
     <link rel="stylesheet" th:href="@{/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/products.css}">
 </head>
 
 <body>
@@ -12,7 +13,7 @@
     <main style="flex:1; gap: 1rem;">
         <h2 class="list-title">Products</h2>
         <div class="product-list-container flex column">
-            <div class="list-controls flex column">
+            <div class="table-controls flex column">
                 <div class="search-container flex">
                     <div class="search-bar">
                         <select name="filter-type" id="filter-type">
@@ -29,8 +30,8 @@
                     <a th:href="@{/produtos/novo}" class="btn">Add product</a>
                 </div>
             </div>
-            <div class="list-wraper">
-                <div class="list-header">
+            <div class="products-table created-table">
+                <div class="table-header">
                     <span>Id</span>
                     <span>Name</span>
                     <span>Price</span>
@@ -38,38 +39,38 @@
                     <span>Amount</span>
                     <span>Actions</span>
                 </div>
-                <div class="product-list">
-                    <div class="product-item">
+                <div class="table-body">
+                    <div class="table-row">
                         <span>1</span>
                         <span>Product 1</span>
                         <span>R$ 10,00</span>
                         <span>10</span>
                         <span>10</span>
-                        <div class="actions">
-                            <span><i class="fa-solid fa-pen-to-square"></i></span>
-                            <span><i class="fa-solid fa-trash"></i></span>
+                        <div class="actions table-row-controls">
+                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </div>
-                    <div class="product-item">
+                    <div class="table-row">
                         <span>2</span>
                         <span>Product 2</span>
                         <span>R$ 20,00</span>
                         <span>20</span>
                         <span>20</span>
-                        <div class="actions">
-                            <span><i class="fa-solid fa-pen-to-square"></i></span>
-                            <span><i class="fa-solid fa-trash"></i></span>
+                        <div class="actions table-row-controls">
+                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </div>
-                    <div class="product-item">
+                    <div class="table-row">
                         <span>3</span>
                         <span>Product 3</span>
                         <span>R$ 30,00</span>
                         <span>30</span>
                         <span>30</span>
-                        <div class="actions">
-                            <span><i class="fa-solid fa-pen-to-square"></i></span>
-                            <span><i class="fa-solid fa-trash"></i></span>
+                        <div class="actions table-row-controls">
+                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#"><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </div>
                 </div>

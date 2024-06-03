@@ -1,0 +1,34 @@
+.reports-control-panel-container{
+    margin-block: 1rem;
+
+}
+
+.reports-control-panel {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-inline: auto;
+    width: 90%;
+    padding: 1rem;
+}
+
+#report-control-form {
+    gap: 2rem;
+    align-items: center;
+}
+
+#report-control-form > .form-group {
+    display: flex;
+    gap: .5rem;
+}
+
+#report-control-form > .form-group:last-child {
+    margin-inline-start: auto;
+}
+
+.report-table {
+    border: 1px solid var(--primary-color);
+}
+
+.report-table>.table-body{
+    max-height: 300px;
+}
