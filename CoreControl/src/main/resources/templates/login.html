@@ -24,9 +24,11 @@
                             <p><label for="password">Senha</label></p>
                             <input type="password" id="password" name="password" required>
                         </div>
-                        <div class="input_container">
-                            <input type="checkbox" id="remember" name="remember">
-                            <label for="remember">Manter Login</label>
+                        <div class="error_container">
+                            <!-- thymeleaf if -->
+                            <p th:if="${error}" class="error-message">
+                                Invalid username or password
+                            </p>
                         </div>
                         <button type="submit" class="btn" id="login-btn" title="Fazer login">Login</button>
                     </form>

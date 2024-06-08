@@ -4,23 +4,50 @@
  */
 package com.matheus.CoreControl.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.matheus.CoreControl.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/login")
-    public String loginPage() {
+    public String loginPage(Model model) {
+        System.out.println(model.getAttribute("error"));
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginPost(@RequestBody String entity) {
-        // TODO: process POST request
-        return "redirect:/";
+    public String login(
+            @RequestParam("user") String login,
+            @RequestParam("password") String password,
+            HttpServletRequest request, HttpServletResponse response,
+            Model model) {
+
+        if (userService.validateUser(login, password)) {
+            model.addAttribute("user", login);
+            return "redirect:/";
+        }
+        model.addAttribute("error", true);
+        return "/login";
     }
 
+    @GetMapping("/logout")
+    public String getMethodName(HttpSession session, HttpServletResponse response) {
+        // Invalidate the session
+        session.invalidate();
+        return "redirect:/login";
+    }
 }

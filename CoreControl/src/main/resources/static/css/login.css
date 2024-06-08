@@ -3,6 +3,12 @@ body {
     color: var(--neutral-white);
 }
 
+.error-message {
+    color: var(--error-color);
+    
+    text-align: center;
+}
+
 .container {
     display: flex;
     justify-content: center;

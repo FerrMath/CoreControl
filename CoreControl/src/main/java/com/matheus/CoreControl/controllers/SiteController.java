@@ -7,10 +7,18 @@ package com.matheus.CoreControl.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class SiteController {
+
     @GetMapping("/")
-    public String homePage() {
+    public String homeOrLogin(HttpSession session, HttpServletResponse response) {
+        var user = session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
         return "index";
     }
 }
