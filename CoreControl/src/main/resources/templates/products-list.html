@@ -39,38 +39,23 @@
                     <span>Amount</span>
                     <span>Actions</span>
                 </div>
-                <div class="table-body">
+                <div class="table-body" th:each="product : ${products}">
                     <div class="table-row">
-                        <span>1</span>
-                        <span>Product 1</span>
-                        <span>R$ 10,00</span>
-                        <span>10</span>
-                        <span>10</span>
+                        <span th:text="${product.id}">1</span>
+                        <span th:text="${product.name}">Product 1</span>
+                        <span th:text="${product.cost}">R$ 10,00</span>
+                        <span th:text="${product.profit}">10</span>
+                        <span th:text="${product.stock}">10</span>
                         <div class="actions table-row-controls">
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
-                        </div>
-                    </div>
-                    <div class="table-row">
-                        <span>2</span>
-                        <span>Product 2</span>
-                        <span>R$ 20,00</span>
-                        <span>20</span>
-                        <span>20</span>
-                        <div class="actions table-row-controls">
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
-                        </div>
-                    </div>
-                    <div class="table-row">
-                        <span>3</span>
-                        <span>Product 3</span>
-                        <span>R$ 30,00</span>
-                        <span>30</span>
-                        <span>30</span>
-                        <div class="actions table-row-controls">
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                            <a th:href="@{/produtos/produto/}+${product.id}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <form th:action="@{delete/{id}(productId=${product.id})}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+
+                            <!-- <a th:href="@{/produtos/delete}"><i class="fa-solid fa-trash"></i></a> -->
                         </div>
                     </div>
                 </div>

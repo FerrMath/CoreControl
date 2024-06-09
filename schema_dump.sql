@@ -16,6 +16,40 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) DEFAULT NULL,
+  `cost` double DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `max_stock` double DEFAULT NULL,
+  `min_stock` double DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `profit` double DEFAULT NULL,
+  `stock` double DEFAULT NULL,
+  `unit` double DEFAULT NULL,
+  `unit_measure` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,'Categoria A',25,'Este é o produto A.',50,5,'Produto A',35,10,15,1,'unidade'),(2,'Categoria B',40,'Este é o produto B.',80,8,'Produto B',56,16,30,1,'unidade'),(3,'Categoria C',60,'Este é o produto C.',120,12,'Produto C',84,24,50,1,'unidade'),(4,'Categoria D',80,'Este é o produto D.',200,20,'Produto D',112,32,100,1,'unidade');
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -52,4 +86,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08 17:44:21
+-- Dump completed on 2024-06-09 17:57:52
