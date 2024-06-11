@@ -26,10 +26,23 @@ public class ProductService {
     }
 
     public void saveProduct(Product product) {
-        productRepo.save(product);
+        if (product == null) {
+            System.out.println("Product is null");
+            return;
+        }
+
+        if (productIsValid(product)) {
+            product.setStock(0.0);
+            productRepo.save(product);
+        }
     }
 
     public List<Product> findAllProducts() {
         return productRepo.findAll();
+    }
+
+    private boolean productIsValid(Product product) {
+        return product != null && product.getName() != null && product.getPrice() != null && product.getPrice() > 0.0
+                && product.getCost() != null && product.getCost() > 0.0 && product.getStock() == null;
     }
 }

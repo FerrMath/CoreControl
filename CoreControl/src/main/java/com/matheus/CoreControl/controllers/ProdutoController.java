@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.matheus.CoreControl.model.Product;
 import com.matheus.CoreControl.service.ProductService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -34,20 +34,22 @@ public class ProdutoController {
     }
 
     @GetMapping("/novo")
-    public String showPordutctForm() {
+    public String showPordutctForm(Model model) {
+        model.addAttribute("product", new Product());
         return "product-form";
     }
 
-    // TODO Redireciona para a página inicial temporariamente
     @PostMapping("/salvar")
-    public String postMethodName(@RequestBody String entity) {
-        System.out.println("Salvou com sucesso o produto");
-        return "redirect:/";
+    public String postMethodName(@ModelAttribute Product entity) {
+        productService.saveProduct(entity);
+        // TODO criar registro de log para ação
+        return "redirect:/produtos/";
     }
 
     @DeleteMapping("/delete/{productId}")
     public String deleteProduct(@RequestParam Long productId) {
         productService.deleteProduct(productId);
+        // TODO criar registro de log para ação
         return "redirect:/produtos/";
     }
 
