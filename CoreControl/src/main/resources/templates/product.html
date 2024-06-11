@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 
 <head>
-    <th:block th:replace="~{fragments/head :: head(title='Produto X | CoreControl')}"></th:block>
+    <th:block th:replace="~{fragments/head :: head(title='Produto ' + ${product.name} + ' | CoreControl')}">
+    </th:block>
     <link rel="stylesheet" th:href="@{/css/product.css}">
 </head>
 
@@ -12,7 +13,7 @@
     <main style="flex:1;">
         <div class="container">
             <div class="product-title-container">
-                <h2>Nome do produto</h2>
+                <h2 th:text="${product.name}"></h2>
             </div>
             <div class="product-container grid">
                 <div class="product-info-container flex column">
@@ -29,31 +30,27 @@
                         </div>
                         <div class="info-row">
                             <span>Id:</span>
-                            <span>1</span>
-                        </div>
-                        <div class="info-row">
-                            <span>EAN:</span>
-                            <span>1234567890123</span>
+                            <span th:text="${product.id}">1</span>
                         </div>
                         <div class="info-row">
                             <span>Nome:</span>
-                            <span>Produto 1</span>
+                            <span th:text="${product.name}">Produto 1</span>
                         </div>
                         <div class="info-row">
                             <span>Preço:</span>
-                            <span>R$ 10,00</span>
+                            <span th:text="${product.cost}">R$ 10,00</span>
                         </div>
                         <div class="info-row">
                             <span>Selling price:</span>
-                            <span>R$ 13,00</span>
+                            <span th:text="${product.price}">R$ 13,00</span>
                         </div>
                         <div class="info-row">
                             <span>profit (&percnt;):</span>
-                            <span>30</span>
+                            <span th:text="${product.profit}">30</span>
                         </div>
                         <div class="info-row">
-                            <span>Discount:</span>
-                            <span>0%</span>
+                            <span>Discount (&percnt;):</span>
+                            <span th:text="${product.discount}">0%</span>
                         </div>
                     </div>
                 </div>
@@ -62,18 +59,17 @@
                     <div class="storage-info-row">
                         <div class="storage-info">
                             <span>Available Amt:</span>
-                            <span>10</span>
+                            <span th:text="${product.stock}">10</span>
                         </div>
                         <div class="storage-info">
                             <span>Min. Amt:</span>
-                            <span>5</span>
+                            <span th:text="${product.minStock}">5</span>
                         </div>
                         <div class="storage-info">
                             <span>Max. Amt:</span>
-                            <span>120</span>
+                            <span th:text="${product.maxStock}">120</span>
                         </div>
-                        <div class="storage-info">
-                        </div>
+
                     </div>
                     <div class="storage-info-row">
                         <button id="add-discount-btn" class="btn">Add discount</button>

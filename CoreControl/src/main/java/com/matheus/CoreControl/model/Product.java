@@ -23,12 +23,25 @@ public class Product {
     private String description;
     private String category;
     private Double stock;
+    private Double discount;
 
     boolean isStockBelowMin() {
         return stock < minStock;
     }
 
+    boolean isStockAlmostEmpty() {
+        return stock < minStock * 1.5;
+    }
+
     boolean isStockAboveMax() {
         return stock > maxStock;
+    }
+
+    public Double getPrice() {
+        double effectiveCost = (cost != null) ? cost : 0.0;
+        double effectiveProfit = (profit != null) ? profit : 0.0;
+        double effectiveDiscount = (discount != null) ? discount : 0.0;
+
+        return effectiveCost + (effectiveCost * effectiveProfit / 100) - (effectiveCost * effectiveDiscount / 100);
     }
 }

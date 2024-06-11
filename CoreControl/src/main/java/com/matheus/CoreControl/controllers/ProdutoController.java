@@ -27,9 +27,9 @@ public class ProdutoController {
         return "products-list";
     }
 
-    // TODO temporário
-    @GetMapping("/produto/{id}")
-    public String getMethodName() {
+    @GetMapping("/produto/{productId}")
+    public String displayPorductInfo(@RequestParam Long productId, Model model) {
+        model.addAttribute("product", productService.findProductById(productId));
         return "product";
     }
 
@@ -40,7 +40,7 @@ public class ProdutoController {
     }
 
     @PostMapping("/salvar")
-    public String postMethodName(@ModelAttribute Product entity) {
+    public String saveNewProduct(@ModelAttribute Product entity) {
         productService.saveProduct(entity);
         // TODO criar registro de log para ação
         return "redirect:/produtos/";

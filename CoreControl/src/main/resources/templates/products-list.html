@@ -47,7 +47,7 @@
                         <span th:text="${product.profit}">10</span>
                         <span th:text="${product.stock}">10</span>
                         <div class="actions table-row-controls">
-                            <a th:href="@{/produtos/produto/}+${product.id}">
+                            <a th:href="@{/produtos/produto/{id}(productId=${product.id})}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <form th:action="@{delete/{id}(productId=${product.id})}" method="post">

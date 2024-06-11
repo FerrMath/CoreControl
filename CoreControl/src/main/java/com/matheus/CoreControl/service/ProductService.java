@@ -27,12 +27,12 @@ public class ProductService {
 
     public void saveProduct(Product product) {
         if (product == null) {
-            System.out.println("Product is null");
             return;
         }
 
         if (productIsValid(product)) {
             product.setStock(0.0);
+            product.setDiscount(0.0);
             productRepo.save(product);
         }
     }
