@@ -1,5 +1,6 @@
 package com.matheus.CoreControl.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Product {
     private Double maxStock;
     private Double cost;
     private Double profit;
+    @Column(nullable = false)
     private Double price;
     private String unitMeasure;
     private Double unit;
@@ -25,23 +27,26 @@ public class Product {
     private Double stock;
     private Double discount;
 
-    boolean isStockBelowMin() {
-        return stock < minStock;
-    }
-
-    boolean isStockAlmostEmpty() {
-        return stock < minStock * 1.5;
-    }
-
-    boolean isStockAboveMax() {
-        return stock > maxStock;
-    }
-
     public Double getPrice() {
         double effectiveCost = (cost != null) ? cost : 0.0;
         double effectiveProfit = (profit != null) ? profit : 0.0;
         double effectiveDiscount = (discount != null) ? discount : 0.0;
 
         return effectiveCost + (effectiveCost * effectiveProfit / 100) - (effectiveCost * effectiveDiscount / 100);
+    }
+
+    public boolean isStockBelowMin() {
+        return stock < minStock;
+    }
+
+    public boolean isStockAlmostEmpty() {
+        if (isStockBelowMin()) {
+            return false;
+        }
+        return stock < minStock * 1.5;
+    }
+
+    public boolean isStockAboveMax() {
+        return stock > maxStock;
     }
 }

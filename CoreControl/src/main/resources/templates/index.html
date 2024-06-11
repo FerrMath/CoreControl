@@ -15,7 +15,8 @@
                 </div>
                 <div class="notification_text">
                     <h3>Warning</h3>
-                    <p>There is X products that are under the minimum amount allowed.</p>
+                    <p>There is <span th:text="${OOStockMin}"></span> products that are under the minimum amount
+                        allowed.</p>
                 </div>
             </div>
             <div class="notification-card top-center flex column">
@@ -24,7 +25,8 @@
                 </div>
                 <div class="notification_text">
                     <h3>Warning</h3>
-                    <p>There is 3 products that soon will reach the minimum amount.</p>
+                    <p>There is <span th:text="${CTLproducts}"></span> products that soon will reach the minimum amount.
+                    </p>
                 </div>
             </div>
             <div class="report-history-container notification-card middle-left">

@@ -41,6 +41,14 @@ public class ProductService {
         return productRepo.findAll();
     }
 
+    public List<Product> findProductsBelowStockMinimun() {
+        return findAllProducts().stream().filter(p -> p.isStockBelowMin()).toList();
+    }
+
+    public List<Product> findProductsAlmostEmpty() {
+        return findAllProducts().stream().filter(p -> p.isStockAlmostEmpty()).toList();
+    }
+
     private boolean productIsValid(Product product) {
         return product != null && product.getName() != null && product.getPrice() != null && product.getPrice() > 0.0
                 && product.getCost() != null && product.getCost() > 0.0 && product.getStock() == null;
