@@ -37,6 +37,15 @@ public class ProductService {
         }
     }
 
+    public void updateProduct(Product product) {
+        if (product == null) {
+            return;
+        }
+        if (productIsValid(product)) {
+            productRepo.save(product);
+        }
+    }
+
     public List<Product> findAllProducts() {
         return productRepo.findAll();
     }
@@ -51,6 +60,7 @@ public class ProductService {
 
     private boolean productIsValid(Product product) {
         return product != null && product.getName() != null && product.getPrice() != null && product.getPrice() > 0.0
-                && product.getCost() != null && product.getCost() > 0.0 && product.getStock() == null;
+                && product.getCost() != null && product.getCost() > 0.0
+                && (product.getStock() == null || product.getStock() >= 0.0);
     }
 }

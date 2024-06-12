@@ -9,8 +9,14 @@
     <th:block th:replace="~{fragments/header :: header}"></th:block>
     <main>
         <div class="form-container">
-            <form th:action="@{/produtos/salvar}" th:object="${product}" method="post" class="flex column"
-                id="product-form">
+            <form th:action="${edit} ? @{/produtos/editar/{productId}(productId=${product.id})} : @{/produtos/salvar}"
+                th:object="${product}" method="post" class="flex column" id="product-form">
+                <div class="hidden_inputs">
+                    <input th:if="${edit}" type="hidden" name="_method" value="PUT">
+                    <input th:if="${edit}" type="hidden" name="id" th:value="*{id}">
+                    <input th:if="${edit}" type="hidden" name="stock" th:value="*{stock}">
+                    <input th:if="${edit}" type="hidden" name="discount" th:value="*{discount}">
+                </div>
                 <div class="form-row">
                     <div class="input-container flex column">
                         <label for="nome">Nome do produto</label>

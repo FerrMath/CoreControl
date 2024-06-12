@@ -25,7 +25,8 @@
                             <h3>Product Info</h3>
                             <span class="edit-product-btn">
                                 <!-- TODO link to edit form -->
-                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a th:href="@{/produtos/editar/{productId}(productId=${product.id})}"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
                             </span>
                         </div>
                         <div class="info-row">
@@ -72,6 +73,7 @@
 
                     </div>
                     <div class="storage-info-row">
+                        <!-- TODO criar methods para cada função gerada aqui -->
                         <button id="add-discount-btn" class="btn">Add discount</button>
                         <button id="remove-discount-btn" class="btn">Remove discount</button>
                         <button id="buy-product-btn" class="btn">Buy more</button>
