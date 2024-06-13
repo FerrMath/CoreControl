@@ -63,11 +63,38 @@ public class ProdutoController {
         return "redirect:/produtos/produto/" + productId;
     }
 
+    @PostMapping("/produto/editar/{productId}")
+    public String partialProductEdit(@RequestParam(name = "productId") Long productId,
+            @RequestParam(name = "discount", required = false) Double productDiscount,
+            @RequestParam(name = "stock", required = false) Double productStock,
+            Model model) {
+
+        System.out.println(productDiscount);
+        System.out.println(productStock);
+        Product product = productService.findProductById(productId);
+        if (productDiscount == null && productStock == null) {
+            System.out.println("No changes to be made");
+            return "redirect:/produtos/produto/" + productId;
+        }
+
+        if (productDiscount != null) {
+            System.out.println("Passei pelo desconto");
+            product.setDiscount(productDiscount);
+            productService.updateProduct(product);
+        }
+
+        if (productStock != null) {
+            product.setStock(product.getStock() + productStock);
+            productService.updateProduct(product);
+        }
+        // TODO criar registro de log para ação
+        return "redirect:/produtos/produto/" + productId;
+    }
+
     @DeleteMapping("/delete/{productId}")
-    public String deleteProduct(@RequestParam Long productId) {
+    public String deleteProduct(@RequestParam("productId") Long productId) {
         productService.deleteProduct(productId);
         // TODO criar registro de log para ação
         return "redirect:/produtos/";
     }
-
 }

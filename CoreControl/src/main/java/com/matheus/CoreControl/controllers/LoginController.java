@@ -25,7 +25,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(Model model) {
-        System.out.println(model.getAttribute("error"));
         return "login";
     }
 
