@@ -1,0 +1,38 @@
+:modal {
+    background-color: var(--neutral-white);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    min-width: 500px;
+    position: absolute;
+}
+
+:modal[open]{
+    display: flex;
+    padding: 1rem;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: var(--radius-8);
+}
+
+:modal[open] > .modal-top {
+    justify-content: space-between;
+    align-items: center;
+}
+
+:modal[open] > .modal-controls {
+    justify-content: flex-end;
+}
+
+div[data-modal-inputs] {
+    margin-block-end: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: var(--padding-0-5);
+    border: 2px solid var(--primary-color-2);
+    border-radius: var(--radius-8);
+    outline: none;
+}

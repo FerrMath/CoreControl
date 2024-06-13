@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 
 <head>
-    <th:block th:replace="~{fragments/head :: head(title='Produto X | CoreControl')}"></th:block>
+    <th:block th:replace="~{fragments/head :: head(title='Produto ' + ${product.name} + ' | CoreControl')}">
+    </th:block>
     <link rel="stylesheet" th:href="@{/css/product.css}">
+    <link rel="stylesheet" th:href="@{/css/modal.css}">
 </head>
 
 <body style="gap:1.5rem">
@@ -12,7 +14,7 @@
     <main style="flex:1;">
         <div class="container">
             <div class="product-title-container">
-                <h2>Nome do produto</h2>
+                <h2 th:text="${product.name}"></h2>
             </div>
             <div class="product-container grid">
                 <div class="product-info-container flex column">
@@ -24,62 +26,85 @@
                             <h3>Product Info</h3>
                             <span class="edit-product-btn">
                                 <!-- TODO link to edit form -->
-                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a th:href="@{/produtos/editar/{productId}(productId=${product.id})}"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
                             </span>
                         </div>
                         <div class="info-row">
                             <span>Id:</span>
-                            <span>1</span>
-                        </div>
-                        <div class="info-row">
-                            <span>EAN:</span>
-                            <span>1234567890123</span>
+                            <span th:text="${product.id}">1</span>
                         </div>
                         <div class="info-row">
                             <span>Nome:</span>
-                            <span>Produto 1</span>
+                            <span th:text="${product.name}">Produto 1</span>
                         </div>
                         <div class="info-row">
                             <span>Preço:</span>
-                            <span>R$ 10,00</span>
+                            <span th:text="${product.cost}">R$ 10,00</span>
                         </div>
                         <div class="info-row">
                             <span>Selling price:</span>
-                            <span>R$ 13,00</span>
+                            <span th:text="${product.price}">R$ 13,00</span>
                         </div>
                         <div class="info-row">
                             <span>profit (&percnt;):</span>
-                            <span>30</span>
+                            <span th:text="${product.profit}">30</span>
                         </div>
                         <div class="info-row">
-                            <span>Discount:</span>
-                            <span>0%</span>
+                            <span>Discount (&percnt;):</span>
+                            <span th:text="${product.discount}">0%</span>
                         </div>
                     </div>
                 </div>
                 <div class="storage-info-container flex column">
+                    <dialog data-modal class="column gap-1">
+                        <div class="modal-top flex">
+                            <h3><span data-modal-span></span></h3>
+                            <button data-modal-close class="btn">&times;</button>
+                        </div>
+                        <form th:action="@{/produtos/produto/editar/{productId}(productId=${product.id})}"
+                            data-modal-form method="post">
+                            <input type="hidden" name="productId" th:value="${product.id}">
+                            <div data-modal-inputs class="flex column gap-1">
+                            </div>
+                            <div class="modal-controls flex gap-1">
+                                <button data-modal-cancel type="reset" class="btn" id="cancel-btn">Cancel</button>
+                                <button data-modal-submit type="submit" class="btn">Submit</button>
+                            </div>
+                        </form>
+                    </dialog>
                     <h3>Storage control</h3>
                     <div class="storage-info-row">
                         <div class="storage-info">
                             <span>Available Amt:</span>
-                            <span>10</span>
+                            <span th:text="${product.stock}">10</span>
                         </div>
                         <div class="storage-info">
                             <span>Min. Amt:</span>
-                            <span>5</span>
+                            <span th:text="${product.minStock}">5</span>
                         </div>
                         <div class="storage-info">
                             <span>Max. Amt:</span>
-                            <span>120</span>
+                            <span th:text="${product.maxStock}">120</span>
                         </div>
-                        <div class="storage-info">
-                        </div>
+
                     </div>
                     <div class="storage-info-row">
-                        <button id="add-discount-btn" class="btn">Add discount</button>
-                        <button id="remove-discount-btn" class="btn">Remove discount</button>
-                        <button id="buy-product-btn" class="btn">Buy more</button>
-                        <button id="delete-product-btn" class="btn">Delete</button>
+                        <!-- TODO criar methods para cada função gerada aqui -->
+                        <button id="add-discount-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
+                            value="addDiscount">Add
+                            discount</button>
+                        <button id="remove-discount-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
+                            value="remDiscount">Remove
+                            discount</button>
+                        <button id="buy-product-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
+                            value="addStock">Buy more</button>
+                        <form th:action="@{/produtos/delete/{id}(productId=${product.id})}" id="delete-product-form"
+                            method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn delete-product-submit"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </form>
                     </div>
                 </div>
                 <div class="product-movement-info-container">
@@ -127,6 +152,8 @@
     <th:block th:replace=" ~{fragments/footer :: footer(teste='teste' )}">
     </th:block>
     <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/productModal.js}"></script>
+    <script th:src="@{/js/product.js}"></script>
 </body>
 
 </html>

@@ -25,7 +25,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(Model model) {
-        System.out.println(model.getAttribute("error"));
         return "login";
     }
 
@@ -34,10 +33,12 @@ public class LoginController {
             @RequestParam("user") String login,
             @RequestParam("password") String password,
             HttpServletRequest request, HttpServletResponse response,
-            Model model) {
+            Model model, HttpSession session) {
 
         if (userService.validateUser(login, password)) {
             model.addAttribute("user", login);
+            System.out.println("Login successful");
+            session.setAttribute("user", login);
             return "redirect:/";
         }
         model.addAttribute("error", true);

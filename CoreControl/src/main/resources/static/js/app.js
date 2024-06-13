@@ -17,17 +17,11 @@
     }
 
     function updateSalePrice() {
-        const priceElement = document.getElementById('price');
+        const priceElement = document.getElementById('cost');
         const profitElement = document.getElementById('profit');
-        const priceSale = document.getElementById('priceSale');
+        const priceSale = document.getElementById('price');
 
-        [priceElement, profitElement].forEach((element) => {
-            if (element === null) return;
-
-            if (element.value === '') {
-                priceSale.value = '0.00';
-                return;
-            }
+        [priceElement, profitElement, priceSale].forEach((element) => {
             
             element.addEventListener('input', () => {
                 const price = priceElement.value;

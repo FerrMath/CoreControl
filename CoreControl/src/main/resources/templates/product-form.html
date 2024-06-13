@@ -9,66 +9,77 @@
     <th:block th:replace="~{fragments/header :: header}"></th:block>
     <main>
         <div class="form-container">
-            <form th:action="@{/produtos/salvar}" method="post" class="flex column" id="product-form">
+            <form th:action="${edit} ? @{/produtos/editar/{productId}(productId=${product.id})} : @{/produtos/salvar}"
+                th:object="${product}" method="post" class="flex column" id="product-form">
+                <div class="hidden_inputs">
+                    <input th:if="${edit}" type="hidden" name="_method" value="PUT">
+                    <input th:if="${edit}" type="hidden" name="id" th:value="*{id}">
+                    <input th:if="${edit}" type="hidden" name="stock" th:value="*{stock}">
+                    <input th:if="${edit}" type="hidden" name="discount" th:value="*{discount}">
+                </div>
                 <div class="form-row">
                     <div class="input-container flex column">
                         <label for="nome">Nome do produto</label>
-                        <!-- input must be letters from a-z -->
-                        <input type="text" id="nome" name="nome" pattern="[a-zA-Z]{3,}" required></input>
-
+                        <input type="text" th:field="*{name}" id="nome" name="name" pattern="[a-zA-Z\s]{3,}" required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="input-container flex column">
-                        <label for="minimum">Qtd. mínima de estoque</label>
-                        <input type="number" id="minimum" name="minimum" min="1" required></input>
+                        <label for="minStock">Qtd. mínima de estoque</label>
+                        <input type="number" th:field="*{minStock}" id="minStock" name="minStock" min="1" required />
                     </div>
                     <div class="input-container flex column">
-                        <label for="maximum">Qtd. máxima de estoque</label>
-                        <input type="text" id="maximum" name="maximum" required></input>
+                        <label for="maxStock">Qtd. máxima de estoque</label>
+                        <input type="number" th:field="*{maxStock}" id="maxStock" name="maxStock" required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="input-container flex column">
                         <label for="category">Categoria</label>
-                        <select id="category" name="category" required>
-                            <option value="1">Categoria 1</option>
-                            <option value="2">Categoria 2</option>
-                            <option value="3">Categoria 3</option>
+                        <select id="category" th:field="*{category}" name="category" required>
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            <option value="Categoria 1">Categoria 1</option>
+                            <option value="Categoria 2">Categoria 2</option>
+                            <option value="Categoria 3">Categoria 3</option>
                         </select>
                     </div>
                     <div class="input-container flex column">
-                        <label for="price">Preço de custo (R&dollar;)</label>
-                        <input type="number" step="0.1" id="price" name="price" value="0.00" required>
+                        <label for="cost">Preço de custo (R&dollar;)</label>
+                        <input type="number" th:field="*{cost}" step="0.1" id="cost" name="cost" value="0.00"
+                            required />
                     </div>
                     <div class="input-container flex column">
                         <label for="profit">Lucro (&percnt;)</label>
-                        <input type="number" id="profit" name="profit" min="0" value="0" required>
+                        <input type="number" th:field="*{profit}" id="profit" name="profit" min="0" value="0"
+                            required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="input-container flex column">
-                        <label for="undMedida">Un. Medida</label>
-                        <select id="undMedida" name="undMedida" required>
-                            <option value="1">Unidade</option>
-                            <option value="2">Kg</option>
-                            <option value="3">Litro</option>
+                        <label for="unitMeasure">Un. Medida</label>
+                        <select id="unitMeasure" th:field="*{unitMeasure}" name="unitMeasure" required>
+                            <option value="" disabled selected>Selecione uma unidade</option>
+                            <option value="unidade">Unidade</option>
+                            <option value="Kg">Kg</option>
+                            <option value="Litro">Litro</option>
                         </select>
                     </div>
                     <div class="input-container flex column">
-                        <label for="medida">Medida</label>
-                        <input type="number" id="medida" name="medida" value="0.00" min="0" step="0.1" required>
+                        <label for="unit">Medida</label>
+                        <input type="number" th:field="*{unit}" id="unit" name="unit" value="0.00" min="0" step="0.1"
+                            required />
                     </div>
                     <div class="input-container flex column">
-                        <label for="priceSale">Preço de venda (R&dollar;)</label>
-                        <input type="number" id="priceSale" name="priceSale" value="0.00" min="0" step="0.1" required
-                            disabled>
+                        <label for="price">Preço de venda (R&dollar;)</label>
+                        <input type="number" th:field="*{price}" id="price" name="price" value="0.00" min="0" step="0.1"
+                            required />
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="input-container flex column">
                         <label for="description">Descrição</label>
-                        <textarea id="description" name="description" required rows="3"></textarea>
+                        <textarea id="description" th:field="*{description}" name="description" required
+                            rows="3"></textarea>
                     </div>
                 </div>
                 <div class="form-row button-row">
@@ -76,6 +87,7 @@
                     <button type="submit" class="btn" id="save-btn" title="Salvar">Registrar</button>
                 </div>
             </form>
+
         </div>
     </main>
     <th:block th:replace="~{fragments/footer :: footer}"></th:block>
