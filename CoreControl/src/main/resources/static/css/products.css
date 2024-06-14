@@ -28,7 +28,7 @@
     align-items: center;
 }
 
-.table-controls > .search-container > .search-bar {
+ .search-bar {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border-radius: 8px;
@@ -36,9 +36,9 @@
     overflow: hidden;
 }
 
-.table-controls > .search-container > .search-bar input,
-.table-controls > .search-container > button,
-.table-controls > .search-container > .search-bar select {
+#filter-form > .search-bar input,
+#filter-form > button,
+#filter-form > .search-bar select {
     padding: var(--padding-0-5);
     border: none;
     border-radius: 0;
@@ -46,13 +46,13 @@
     background-color: transparent;
 }
 
-.table-controls > .search-container > .search-bar input {
+#filter-form > .search-bar input {
     border: 2px solid transparent;
     border-left: 2px solid var(--primary-color-2);
     padding-left: var(--padding-1);
 }
 
-.table-controls > .search-container > button {
+#filter-form > button {
     background-color: var(--primary-color-2);
     color: white;
     cursor: pointer;
@@ -61,9 +61,9 @@
     border-radius: 50%;
 }
 
-.table-controls > .search-container > .search-bar input:focus {
+#filter-form > .search-bar input:focus {
     outline: none;
 }
-.table-controls > .search-container > .search-bar select:focus {
+#filter-form > .search-bar select:focus {
     outline: none;
 }

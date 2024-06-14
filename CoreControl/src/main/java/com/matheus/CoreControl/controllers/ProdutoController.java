@@ -29,6 +29,25 @@ public class ProdutoController {
         return "products-list";
     }
 
+    @GetMapping("/filter/")
+    public String filterProducts(@RequestParam(name = "filter") String filter,
+            @RequestParam(name = "value") String value,
+            Model model) {
+        switch (filter) {
+            case "name":
+                model.addAttribute("products", productService.findAllProductByNameContaining(value));
+                break;
+            case "category":
+                model.addAttribute("products", productService.findAllByCategoryContaining(value));
+                break;
+            default:
+                // Optional: Add a message or handle the default case differently
+                model.addAttribute("message", "No matching filter found.");
+                break;
+        }
+        return "products-list";
+    }
+
     @GetMapping("/produto/{productId}")
     public String displayPorductInfo(@PathVariable Long productId, Model model) {
         model.addAttribute("product", productService.findProductById(productId));

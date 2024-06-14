@@ -21,8 +21,12 @@ public class ProductService {
         return productRepo.findById(id).orElse(null);
     }
 
-    public Product findProductByName(String name) {
-        return productRepo.findByName(name);
+    public List<Product> findAllProductByNameContaining(String name) {
+        return productRepo.findAllByNameContaining(name);
+    }
+
+    public List<Product> findAllByCategoryContaining(String category) {
+        return productRepo.findAllByCategoryContaining(category);
     }
 
     public void saveProduct(Product product) {

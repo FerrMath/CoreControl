@@ -15,4 +15,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     // Find all by category
     List<Product> findAllByCategory(String category);
+
+    // Find all by category that has a substring
+    List<Product> findAllByCategoryContaining(String category);
 }

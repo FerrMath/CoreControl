@@ -14,26 +14,30 @@
         <h2 class="list-title">Products</h2>
         <div class="product-list-container flex column">
             <div class="table-controls flex column">
-                <div class="search-container flex">
-                    <div class="search-bar">
-                        <select name="filter-type" id="filter-type">
-                            <option value="name" title="Filter by name">Name</option>
-                            <option value="category" title="Filter by category">Category</option>
-                            <option value="price" title="Filter by price lower or greater than:">Price</option>
-                            <option value="amount" title="Filter by amount lower or greater than:">Amount</option>
-                        </select>
-                        <input type="text" placeholder="Search for products">
-                    </div>
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div class="search-container">
+                    <form th:action="@{filter/}" method="get" id="filter-form" class="flex gap-1">
+                        <div class="search-bar">
+                            <select name="filter" id="filter">
+                                <option value="name" title="Filter by name">Name</option>
+                                <option value="category" title="Filter by category">Category</option>
+                            </select>
+                            <input type="text" name="value" id="value" placeholder="Search for products">
+                        </div>
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
                 </div>
-                <div class="add-product-container">
+                <div class="add-product-container gap-1">
                     <a th:href="@{/produtos/novo}" class="btn">Add product</a>
+                    <a th:href="@{/produtos/}" class="btn">Clear Filters</a>
+                </div>
+                <div class="clear-filter-container">
                 </div>
             </div>
             <div class="products-table created-table">
                 <div class="table-header">
                     <span>Id</span>
                     <span>Name</span>
+                    <span>Category</span>
                     <span>Price</span>
                     <span>Profit(&percnt;)</span>
                     <span>Amount</span>
@@ -43,6 +47,7 @@
                     <div class="table-row">
                         <span th:text="${product.id}">1</span>
                         <span th:text="${product.name}">Product 1</span>
+                        <span th:text="${product.category}">Category</span>
                         <span th:text="${product.cost}">R$ 10,00</span>
                         <span th:text="${product.profit}">10</span>
                         <span th:text="${product.stock}">10</span>
