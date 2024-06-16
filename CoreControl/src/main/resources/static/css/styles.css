@@ -228,9 +228,16 @@ grid-template-columns: 1fr 1fr 2fr;
 .notification_icon_container{
     width: auto;
     max-width: 150px;
-    height: 30%;
+
     max-height: 150px;
     margin-inline: auto;
+}
+
+.table-row > * {
+    /* Overflow to '...' */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .notification_text > h3{

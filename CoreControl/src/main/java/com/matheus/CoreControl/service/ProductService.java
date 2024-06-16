@@ -29,6 +29,14 @@ public class ProductService {
         return productRepo.findAllByCategoryContaining(category);
     }
 
+    public List<Product> findProductsCloseToMinStock() {
+        return productRepo.findAllByStockCloseToMinStock();
+    }
+
+    public List<Product> findProductsBelowMinStock() {
+        return productRepo.findAllByStockBelowMinStock();
+    }
+
     public void saveProduct(Product product) {
         if (product == null) {
             return;

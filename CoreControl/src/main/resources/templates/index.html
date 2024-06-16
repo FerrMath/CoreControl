@@ -10,9 +10,11 @@
     <main>
         <div class="cards_container grid">
             <div class="notification-card top-left flex column">
-                <div class="notification_icon_container">
-                    <img th:src="@{/img/danger.png}" alt="Warning icon">
-                </div>
+                <a th:href="@{/produtos/below-min-stock}">
+                    <div class="notification_icon_container">
+                        <img th:src="@{/img/danger.png}" alt="Warning icon">
+                    </div>
+                </a>
                 <div class="notification_text">
                     <h3>Warning</h3>
                     <p>There is <span th:text="${OOStockMin}"></span> products that are under the minimum amount
@@ -20,9 +22,11 @@
                 </div>
             </div>
             <div class="notification-card top-center flex column">
-                <div class="notification_icon_container">
-                    <img th:src="@{/img/warning.png}" alt="Warning icon">
-                </div>
+                <a th:href="@{/produtos/close-to-min-stock}">
+                    <div class="notification_icon_container">
+                        <img th:src="@{/img/warning.png}" alt="Warning icon">
+                    </div>
+                </a>
                 <div class="notification_text">
                     <h3>Warning</h3>
                     <p>There is <span th:text="${CTLproducts}"></span> products that soon will reach the minimum amount.

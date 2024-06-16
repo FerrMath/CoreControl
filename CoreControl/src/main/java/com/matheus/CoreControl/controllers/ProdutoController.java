@@ -48,6 +48,18 @@ public class ProdutoController {
         return "products-list";
     }
 
+    @GetMapping("/close-to-min-stock")
+    public String listProductsCloseToMinStock(Model model) {
+        model.addAttribute("products", productService.findProductsCloseToMinStock());
+        return "products-list";
+    }
+
+    @GetMapping("/below-min-stock")
+    public String listProductsBelowMinStock(Model model) {
+        model.addAttribute("products", productService.findProductsBelowMinStock());
+        return "products-list";
+    }
+
     @GetMapping("/produto/{productId}")
     public String displayPorductInfo(@PathVariable Long productId, Model model) {
         model.addAttribute("product", productService.findProductById(productId));
@@ -88,8 +100,6 @@ public class ProdutoController {
             @RequestParam(name = "stock", required = false) Double productStock,
             Model model) {
 
-        System.out.println(productDiscount);
-        System.out.println(productStock);
         Product product = productService.findProductById(productId);
         if (productDiscount == null && productStock == null) {
             System.out.println("No changes to be made");
@@ -97,12 +107,21 @@ public class ProdutoController {
         }
 
         if (productDiscount != null) {
-            System.out.println("Passei pelo desconto");
+            if (productDiscount < 0 || productDiscount > 100) {
+                System.out.println("Invalid discount value");
+                return "redirect:/produtos/produto/" + productId;
+            }
             product.setDiscount(productDiscount);
             productService.updateProduct(product);
         }
 
         if (productStock != null) {
+            if (productStock < 0 || productStock > product.getMaxStock()
+                    || productStock + product.getStock() > product.getMaxStock()) {
+                System.out.println("Invalid stock value");
+                return "redirect:/produtos/produto/" + productId;
+            }
+
             product.setStock(product.getStock() + productStock);
             productService.updateProduct(product);
         }
