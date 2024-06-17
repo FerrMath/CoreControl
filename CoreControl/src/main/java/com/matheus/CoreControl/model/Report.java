@@ -1,8 +1,10 @@
 package com.matheus.CoreControl.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.matheus.CoreControl.model.reportEntrys.PurchaseEntry;
 import com.matheus.CoreControl.model.reportEntrys.ReportEntry;
 import com.matheus.CoreControl.model.reportEntrys.SaleEntry;
@@ -10,6 +12,7 @@ import com.matheus.CoreControl.model.reportEntrys.SaleEntry;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +33,9 @@ public class Report {
     private Double totalProfit;
     private LocalDate startDate;
     private LocalDate endDate;
-    @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReportEntry> entries;
+    @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<ReportEntry> entries = new ArrayList<>();
 
     public Report() {
         this.startDate = LocalDate.now();
@@ -43,6 +47,7 @@ public class Report {
         if (entry == null)
             throw new IllegalArgumentException("Entry cannot be null");
 
+        entry.setReport(this);
         entries.add(entry);
 
         if (entry instanceof PurchaseEntry) {
@@ -50,8 +55,8 @@ public class Report {
         } else if (entry instanceof SaleEntry) {
             totalSales += ((SaleEntry) entry).getTotal();
         }
-
         updateTotalProfit();
+        System.out.println("Entry added to report");
     }
 
     public Double getTotalProfit() {
