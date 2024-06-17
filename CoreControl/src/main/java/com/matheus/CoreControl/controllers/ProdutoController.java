@@ -82,7 +82,6 @@ public class ProdutoController {
 
     @PostMapping("/salvar")
     public String saveNewProduct(@ModelAttribute Product entity) {
-        System.out.println("Saving product: " + entity.toString());
         productService.saveProduct(entity);
         // TODO editar para pegar o id do usuário logado
         reportService.newEditEntry(EditType.CREATE, entity.getId(), 1L);
@@ -134,7 +133,7 @@ public class ProdutoController {
 
             product.setStock(product.getStock() + productStock);
             // TODO editar para pegar o id do usuário logado
-            reportService.newPurchaseEntry(productId, 1L, productDiscount, productStock);
+            reportService.newPurchaseEntry(productId, 1L, product.getPrice(), productStock);
             productService.updateProduct(product);
         }
 

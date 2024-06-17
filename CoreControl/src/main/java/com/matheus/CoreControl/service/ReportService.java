@@ -1,6 +1,7 @@
 package com.matheus.CoreControl.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,23 @@ public class ReportService {
         initializeCurrentReport();
     }
 
+    public Report getReportById(Long id) {
+        return reportRepo.findReportById(id);
+    }
+
+    public List<Report> findAllReports() {
+        return reportRepo.findAll();
+    }
+
     private void initializeCurrentReport() {
         int month = LocalDate.now().getMonthValue();
         int year = LocalDate.now().getYear();
         this.currentReport = isCurrentReportValid(year, month) ? reportRepo.findReportByMonthAndYear(year, month)
                 : new Report();
+    }
+
+    public Report getCurrentReport() {
+        return currentReport;
     }
 
     public void newEditEntry(EditType type, Long product, Long user) {

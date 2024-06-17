@@ -37,7 +37,6 @@ public class LoginController {
 
         if (userService.validateUser(login, password)) {
             model.addAttribute("user", login);
-            System.out.println("Login successful");
             session.setAttribute("user", login);
             return "redirect:/";
         }

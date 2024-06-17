@@ -155,11 +155,11 @@ grid-template-columns: 1fr 1fr 2fr;
     padding: .1rem;
 }
 
-.venda > i {
+.SALE > i {
     color: var(--venda-color);
 }
 
-.compra > i {
+.PURCHASE > i {
     color: var(--compra-color);
 }
 
@@ -171,8 +171,7 @@ grid-template-columns: 1fr 1fr 2fr;
     color: var(--error-color);
 }
 
-.editou > span,
-.criou > span {
+.EDIT > span{
     font-weight: 500;
 }
 

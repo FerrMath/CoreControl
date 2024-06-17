@@ -47,7 +47,6 @@ public class Report {
         if (entry == null)
             throw new IllegalArgumentException("Entry cannot be null");
 
-        entry.setReport(this);
         entries.add(entry);
 
         if (entry instanceof PurchaseEntry) {
@@ -56,7 +55,7 @@ public class Report {
             totalSales += ((SaleEntry) entry).getTotal();
         }
         updateTotalProfit();
-        System.out.println("Entry added to report");
+        entry.setReport(this);
     }
 
     public Double getTotalProfit() {

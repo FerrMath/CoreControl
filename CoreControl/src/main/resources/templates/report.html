@@ -11,7 +11,7 @@
     <th:block th:replace="~{fragments/header :: header}"></th:block>
     <main style="flex:1; gap:1.5rem;">
         <div class="wrapper-90">
-            <h1 class="top-h">Report X</h1>
+            <h1 class="top-h" th:text="'Report '+${report.id}"></h1>
             <div class="report-info-filter-container inline-auto">
                 <form action="#" id="report-info-filter-form" class="flex" method="get">
                     <div class="inf-filters flex column gap-1">
@@ -72,39 +72,15 @@
                         <span>Date</span>
                         <span>Hour</span>
                     </div>
-                    <div class="table-body">
-                        <div class="table-row">
-                            <span>1</span>
-                            <span>Sale</span>
-                            <span>Product 1</span>
-                            <span>User 1</span>
-                            <span>01/01/2021</span>
-                            <span>10:00</span>
-                        </div>
-                        <div class="table-row">
-                            <span>2</span>
-                            <span>Purchase</span>
-                            <span>Product 2</span>
-                            <span>User 2</span>
-                            <span>02/01/2021</span>
-                            <span>11:00</span>
-                        </div>
-                        <div class="table-row">
-                            <span>3</span>
-                            <span>Creation</span>
-                            <span>Product 3</span>
-                            <span>User 3</span>
-                            <span>03/01/2021</span>
-                            <span>12:00</span>
-                        </div>
-                        <!-- edit -->
-                        <div class="table-row">
-                            <span>4</span>
-                            <span>Edit</span>
-                            <span>Product 4</span>
-                            <span>User 4</span>
-                            <span>04/01/2021</span>
-                            <span>13:00</span>
+                    <div class="table-body" th:each="entry:${entries}">
+                        <div class=" table-row">
+                            <span th:text="${entry.id}">1</span>
+                            <span th:text="${entry.type}">Sale</span>
+                            <span th:text="${entry.productId}">Product 1</span>
+                            <span th:text="${entry.userId}">User 1</span>
+                            <span th:text="${entry.date}">01/01/2021</span>
+                            <!-- Time to format HH:MM -->
+                            <span th:text="${entry.time}">12:00</span>
                         </div>
                     </div>
                 </div>
