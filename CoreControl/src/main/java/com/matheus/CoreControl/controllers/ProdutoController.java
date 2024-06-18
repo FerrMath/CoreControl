@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.matheus.CoreControl.model.Product;
+import com.matheus.CoreControl.model.enums.EditType;
 import com.matheus.CoreControl.service.ProductService;
+import com.matheus.CoreControl.service.ReportService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +22,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
+    private final ProductService productService;
+    private final ReportService reportService;
+
     @Autowired
-    private ProductService productService;
+    public ProdutoController(ProductService productService, ReportService reportService) {
+        this.productService = productService;
+        this.reportService = reportService;
+    }
 
     @GetMapping("/")
     public String listProducts(Model model) {
@@ -74,9 +82,9 @@ public class ProdutoController {
 
     @PostMapping("/salvar")
     public String saveNewProduct(@ModelAttribute Product entity) {
-        System.out.println("Saving product: " + entity.toString());
         productService.saveProduct(entity);
-        // TODO criar registro de log para ação
+        // TODO editar para pegar o id do usuário logado
+        reportService.newEditEntry(EditType.CREATE, entity.getId(), 1L);
         return "redirect:/produtos/";
     }
 
@@ -89,8 +97,9 @@ public class ProdutoController {
 
     @PutMapping("/editar/{productId}")
     public String submitMovieEdit(@PathVariable Long productId, @ModelAttribute Product product) {
-        // TODO criar registro de log para ação
+        // TODO editar para pegar o id do usuário logado
         productService.saveProduct(product);
+        reportService.newEditEntry(EditType.UPDATE, productId, 1L);
         return "redirect:/produtos/produto/" + productId;
     }
 
@@ -123,16 +132,19 @@ public class ProdutoController {
             }
 
             product.setStock(product.getStock() + productStock);
+            // TODO editar para pegar o id do usuário logado
+            reportService.newPurchaseEntry(productId, 1L, product.getPrice(), productStock);
             productService.updateProduct(product);
         }
-        // TODO criar registro de log para ação
+
         return "redirect:/produtos/produto/" + productId;
     }
 
     @DeleteMapping("/delete/{productId}")
     public String deleteProduct(@RequestParam("productId") Long productId) {
         productService.deleteProduct(productId);
-        // TODO criar registro de log para ação
+        // TODO editar para pegar o id do usuário logado
+        reportService.newEditEntry(EditType.DELETE, productId, 1L);
         return "redirect:/produtos/";
     }
 }

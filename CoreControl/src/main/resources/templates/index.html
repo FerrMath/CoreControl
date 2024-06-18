@@ -42,37 +42,19 @@
                         <span>Download</span>
                         <span>Info</span>
                     </div>
-                    <div class="report">
-                        <span>01/01/2021</span>
-                        <span>01/02/2021</span>
-                        <span>
-                            <a href="#"><i class="fa-solid fa-download"></i></a>
-                        </span>
-                        <span>
-                            <a th:href="@{/reports/report/1}"><i class="fa-solid fa-link"></i></a>
-                        </span>
-                    </div>
-                    <div class="report">
-                        <span>01/02/2021</span>
-                        <span>01/03/2021</span>
-                        <span>
-                            <a href="#"><i class="fa-solid fa-download"></i></a>
-                        </span>
-                        <span>
-                            <a th:href="@{/reports/report/1}"><i class="fa-solid fa-link"></i></a>
-                        </span>
-                    </div>
-                    <div class="report">
-                        <span>01/03/2021</span>
-                        <span>01/04/2021</span>
-                        <span>
-                            <a href="#"><i class="fa-solid fa-download"></i></a>
-                        </span>
-                        <span>
-                            <a th:href="@{/reports/report/1}"><i class="fa-solid fa-link"></i></a>
-                        </span>
-                    </div>
-
+                    <th:block th:each="report:${reports}">
+                        <div class="report">
+                            <span th:text="${report.startDate}">01/01/2021</span>
+                            <span th:text="${report.endDate}">01/02/2021</span>
+                            <span>
+                                <a href="#"><i class="fa-solid fa-download"></i></a>
+                            </span>
+                            <span>
+                                <a th:href="@{/reports/report/{reportId}(reportId=${report.id})}"><i
+                                        class="fa-solid fa-link"></i></a>
+                            </span>
+                        </div>
+                    </th:block>
                 </div>
             </div>
             <div class="notifications-container notification-card top-right">
@@ -80,42 +62,20 @@
                 <h3>Real time updates</h3>
                 <div class="notifications-border">
                     <div class="notifications">
-                        <div class="notification ">
-                            <p class="criou">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                                <span>Produto X was created by Y at Z.</span>
-                            </p>
-                        </div>
-                        <div class="notification ">
-                            <p class="compra">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                                <span>Product X was bought by Y at Z.</span>
-                            </p>
-                        </div>
-                        <div class="notification ">
-                            <p class="estoque">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                                <span>Product X is running out of stock.</span>
-                            </p>
-                        </div>
-                        <div class="notification ">
-                            <p class="falta">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                                <span>Product X is out of stock.</span>
-                            </p>
-                        </div>
-                        <div class="notification ">
-                            <p class="editou">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                                <span>Product X was edited by Y.</span>
-                            </p>
-                        </div>
-                        <div class="notification ">
-                            <p class="venda">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                                <span>Produto X was sold by Y at Z.</span>
-                            </p>
-                        </div>
+                        <th:block th:each="entry:${entries}">
+                            <div class="notification">
+                                <p th:class="${entry.type}">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                    <span>
+                                        Produto <span th:text="${entry.productId}"></span> was <span
+                                            th:text="${entry.type}"></span> by user <span
+                                            th:text="${entry.userId}"></span>
+                                        at
+                                        <span th:text="${entry.date}"></span>.
+                                    </span>
+                                </p>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
             </div>
