@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class EditEntry extends ReportEntry {
     private EditType editType;
+    private Integer quantity = 0;
 
     public EditEntry() {
         this.setType(EntryType.EDIT);

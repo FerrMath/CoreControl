@@ -10,6 +10,7 @@ import com.matheus.CoreControl.model.Report;
 import com.matheus.CoreControl.model.enums.EditType;
 import com.matheus.CoreControl.model.reportEntrys.EditEntry;
 import com.matheus.CoreControl.model.reportEntrys.PurchaseEntry;
+import com.matheus.CoreControl.model.reportEntrys.ReportEntry;
 import com.matheus.CoreControl.model.reportEntrys.SaleEntry;
 import com.matheus.CoreControl.repository.ReportRepo;
 
@@ -28,6 +29,10 @@ public class ReportService {
 
     public Report getReportById(Long id) {
         return reportRepo.findReportById(id);
+    }
+
+    public List<?> getReportByProductId(Long id) {
+        return currentReport.getEntries().stream().filter(entry -> entry.getProductId().equals(id)).toList();
     }
 
     public List<Report> findAllReports() {

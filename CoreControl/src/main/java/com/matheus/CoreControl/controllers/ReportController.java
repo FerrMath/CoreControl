@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.matheus.CoreControl.model.Report;
-import com.matheus.CoreControl.model.reportEntrys.ReportEntry;
 import com.matheus.CoreControl.service.ReportService;
 
 import org.springframework.web.bind.annotation.GetMapping;

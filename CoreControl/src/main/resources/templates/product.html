@@ -117,33 +117,15 @@
                                 <div class="table-cell">Date</div>
                                 <div class="table-cell">User</div>
                             </div>
-                            <div class="table-row">
-                                <div class="table-cell">Sale</div>
-                                <div class="table-cell">10</div>
-                                <div class="table-cell">10/05/2024</div>
-                                <div class="table-cell">1</div>
-                            </div>
-                            <div class="table-row">
-                                <div class="table-cell">Edit (Discount+)</div>
-                                <div class="table-cell">0</div>
-                                <div class="table-cell">09/05/2024 - HH-MM-SS</div>
-                                <div class="table-cell">3</div>
-                            </div>
-                            <div class="table-row">
-                                <div class="table-cell">Purchase</div>
-                                <div class="table-cell">30</div>
-                                <div class="table-cell">08/05/2024</div>
-                                <div class="table-cell">2</div>
-                            </div>
-                            <div class="table-row">
-                                <div class="table-cell">Edit (Discount-)</div>
-                                <div class="table-cell">0</div>
-                                <div class="table-cell">06/05/2024</div>
-                                <div class="table-cell">2</div>
-                            </div>
-                        </div>
-                        <div class="movement-table-btn-container">
-                            <button id="download-product-history" class="btn">Download history</button>
+                            <th:block th:each="entry:${entries}">
+                                <div class="table-row">
+                                    <div class="table-cell" th:text="${entry.type}">Sale</div>
+                                    <div class="table-cell" th:text="${entry.quantity}">10
+                                    </div>
+                                    <div class="table-cell" th:text="${entry.date}">10/05/2024</div>
+                                    <div class="table-cell" th:text="${entry.userId}">1</div>
+                                </div>
+                            </th:block>
                         </div>
                     </div>
                 </div>

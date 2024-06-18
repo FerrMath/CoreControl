@@ -1,6 +1,5 @@
 package com.matheus.CoreControl.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +24,6 @@ public class ProdutoController {
     private final ProductService productService;
     private final ReportService reportService;
 
-    @Autowired
     public ProdutoController(ProductService productService, ReportService reportService) {
         this.productService = productService;
         this.reportService = reportService;
@@ -71,6 +69,7 @@ public class ProdutoController {
     @GetMapping("/produto/{productId}")
     public String displayPorductInfo(@PathVariable Long productId, Model model) {
         model.addAttribute("product", productService.findProductById(productId));
+        model.addAttribute("entries", reportService.getReportByProductId(productId));
         return "product";
     }
 
@@ -122,6 +121,8 @@ public class ProdutoController {
             }
             product.setDiscount(productDiscount);
             productService.updateProduct(product);
+            reportService.newEditEntry(EditType.UPDATE, productId, 1L);
+            return "redirect:/produtos/produto/" + productId;
         }
 
         if (productStock != null) {
@@ -136,7 +137,6 @@ public class ProdutoController {
             reportService.newPurchaseEntry(productId, 1L, product.getPrice(), productStock);
             productService.updateProduct(product);
         }
-
         return "redirect:/produtos/produto/" + productId;
     }
 
