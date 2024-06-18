@@ -29,4 +29,10 @@ public class SaleEntry extends ReportEntry {
         this.quantity = quantity;
         this.total = price * quantity;
     }
+
+    @Override
+    public String[] getInfo() {
+        return new String[] { getId().toString(), getType().toString(), getProductId().toString(),
+                getUserId().toString(), getDate().toString(), getTime().toString() };
+    }
 }
