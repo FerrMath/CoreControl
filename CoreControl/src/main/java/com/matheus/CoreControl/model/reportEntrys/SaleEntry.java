@@ -12,6 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SaleEntry extends ReportEntry {
+    private Long clientId;
     private Double price;
     private Double quantity;
     private Double total;
@@ -20,9 +21,10 @@ public class SaleEntry extends ReportEntry {
         this.setType(EntryType.SALE);
     }
 
-    public SaleEntry(Long productId, Long userId, Double price, Double quantity) {
+    public SaleEntry(Long productId, Long userId, Long clientId, Double price, Double quantity) {
         super(productId, userId);
         this.setType(EntryType.SALE);
+        this.clientId = clientId;
         this.price = price;
         this.quantity = quantity;
         this.total = price * quantity;
