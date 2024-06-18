@@ -24,4 +24,11 @@ public class EditEntry extends ReportEntry {
         this.setType(EntryType.EDIT);
         this.editType = editType;
     }
+
+    @Override
+    public String[] getInfo() {
+        return new String[] { getId().toString(), getType().toString(), getProductId().toString(),
+                getUserId().toString(),
+                getDate().toString(), getTime().toString() };
+    }
 }

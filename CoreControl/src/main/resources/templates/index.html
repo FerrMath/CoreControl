@@ -47,7 +47,8 @@
                             <span th:text="${report.startDate}">01/01/2021</span>
                             <span th:text="${report.endDate}">01/02/2021</span>
                             <span>
-                                <a href="#"><i class="fa-solid fa-download"></i></a>
+                                <a th:href="@{/api/download/{reportId}(reportId=${report.id})}" target="_blank"><i
+                                        class="fa-solid fa-download"></i></a>
                             </span>
                             <span>
                                 <a th:href="@{/reports/report/{reportId}(reportId=${report.id})}"><i

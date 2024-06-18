@@ -51,7 +51,8 @@
                             <div class="table-item table-row-controls">
                                 <a th:href="@{/reports/report/{reportId}(reportId=${report.id})}"><i
                                         class="fa-solid fa-circle-info"></i></a>
-                                <a href="#"><i class="fa-solid fa-download"></i></a>
+                                <a href="@{/api/download/{reportId}(reportId=${report.id})}"><i
+                                        class="fa-solid fa-download"></i></a>
                             </div>
                         </div>
                     </div>

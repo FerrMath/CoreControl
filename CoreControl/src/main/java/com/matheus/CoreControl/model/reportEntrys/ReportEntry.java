@@ -49,4 +49,6 @@ public abstract class ReportEntry {
     public Long getReportId() {
         return report != null ? report.getId() : null;
     }
+
+    public abstract String[] getInfo();
 }
