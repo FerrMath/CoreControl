@@ -13,7 +13,8 @@
         <div class="wrapper-90">
             <h1 class="top-h" th:text="'Report '+${report.id}"></h1>
             <div class="report-info-filter-container inline-auto">
-                <form action="#" id="report-info-filter-form" class="flex" method="get">
+                <form th:action="@{/reports/report/{reportId}/filter(reportId=${report.id})}"
+                    id="report-info-filter-form" class="flex" method="get">
                     <div class="inf-filters flex column gap-1">
                         <div class="filter-rows flex column gap-1">
                             <div class="filter-row flex gap-1">
@@ -25,10 +26,6 @@
                                     <input type="checkbox" id="purchase" name="purchase" placeholder="Purchase">
                                     <label for="purchase">Purchase</label>
                                 </div>
-                                <div class="info-filter">
-                                    <input type="checkbox" id="create" name="create" placeholder="Creation">
-                                    <laber for="create">Creation</laber>
-                                </div>
                                 <!-- edit -->
                                 <div class="info-filter">
                                     <input type="checkbox" id="edit" name="edit" placeholder="Edit">
@@ -37,27 +34,28 @@
                             </div>
                             <div class="filter-row flex gap-1">
                                 <div class="info-filter">
-                                    <label for="start-date">Start Date</label>
-                                    <input type="date" id="start-date" name="start-date" placeholder="Start Date">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="date" id="startDate" name="startDate" placeholder="Start Date">
                                 </div>
                                 <div class="info-filter">
-                                    <label for="end-date">End Date</label>
-                                    <input type="date" id="end-date" name="end-date" placeholder="End Date">
+                                    <label for="endDate">End Date</label>
+                                    <input type="date" id="endDate" name="endDate" placeholder="End Date">
                                 </div>
                                 <!-- Product id -->
                                 <div class="info-filter">
-                                    <label for="product-id">Product ID</label>
-                                    <input type="text" id="product-id" name="product-id" placeholder="Product ID">
+                                    <label for="prodId">Product ID</label>
+                                    <input type="text" id="prodId" name="prodId" placeholder="Product ID">
                                 </div>
                                 <!-- User id -->
                                 <div class="info-filter">
-                                    <label for="user-id">User ID</label>
-                                    <input type="text" id="user-id" name="user-id" placeholder="User ID">
+                                    <label for="userId">User ID</label>
+                                    <input type="text" id="userId" name="userId" placeholder="User ID">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="info-filter-submit-container">
+                        <a th:href="@{/reports/report/{reportId}(reportId=${report.id})}" class="btn">Clear Filters</a>
                         <button type="submit" class="btn">Filtrar</button>
                     </div>
                 </form>
