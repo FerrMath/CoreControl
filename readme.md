@@ -8,6 +8,17 @@
 
 Simplificar o controle de inventário de produtos com acompanhamento de entrada, saída e relatórios detalhados e intuitivos.
 
+## Forma de uso:
+
+* Rodar script [schema_dump.sql](./schema_dump.sql) para criação de usuários de testes;
+
+* Logar com usuário valido:
+    * login: user;
+    * login: admin;
+    * login: super;
+* A senha para todos os os usuários é: "password"
+
+
 ## Funcionalidades básicas:
 
 * Autenticação e Autorização:
