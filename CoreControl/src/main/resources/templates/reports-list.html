@@ -16,7 +16,7 @@
             </h1>
             <div class="reports-control-panel-container">
                 <div class="reports-control-panel">
-                    <form action="#" id="report-control-form" class="flex" method="get">
+                    <form th:action="@{filter}" id="report-control-form" class="flex" method="get">
                         <div class="form-group">
                             <label for="startDate">Start date</label>
                             <input type="date" id="startDate" name="startDate" required>
