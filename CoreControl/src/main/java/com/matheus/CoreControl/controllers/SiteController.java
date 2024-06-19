@@ -27,6 +27,11 @@ public class SiteController {
     private ReportService reportService;
 
     @GetMapping("/")
+    public String home(HttpSession session, HttpServletResponse response, Model model) {
+        return homeOrLogin(session, response, model);
+    }
+
+    @GetMapping("/home")
     public String homeOrLogin(HttpSession session, HttpServletResponse response, Model model) {
         var user = session.getAttribute("user");
         if (user == null) {
