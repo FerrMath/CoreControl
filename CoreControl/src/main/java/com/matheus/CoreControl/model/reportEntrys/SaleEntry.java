@@ -3,6 +3,9 @@ package com.matheus.CoreControl.model.reportEntrys;
 import com.matheus.CoreControl.model.enums.EntryType;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,6 +15,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SaleEntry extends ReportEntry {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Long clientId;
     private Double price;
     private Double quantity;

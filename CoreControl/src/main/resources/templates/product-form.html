@@ -14,8 +14,6 @@
                 <div class="hidden_inputs">
                     <input th:if="${edit}" type="hidden" name="_method" value="PUT">
                     <input th:if="${edit}" type="hidden" name="id" th:value="*{id}">
-                    <input th:if="${edit}" type="hidden" name="stock" th:value="*{stock}">
-                    <input th:if="${edit}" type="hidden" name="discount" th:value="*{discount}">
                 </div>
                 <div class="form-row">
                     <div class="input-container flex column">

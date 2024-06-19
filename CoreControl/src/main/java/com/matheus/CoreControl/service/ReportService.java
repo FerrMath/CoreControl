@@ -3,6 +3,7 @@ package com.matheus.CoreControl.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matheus.CoreControl.model.Product;
@@ -12,9 +13,13 @@ import com.matheus.CoreControl.model.reportEntrys.EditEntry;
 import com.matheus.CoreControl.model.reportEntrys.PurchaseEntry;
 import com.matheus.CoreControl.model.reportEntrys.SaleEntry;
 import com.matheus.CoreControl.repository.ReportRepo;
+import com.matheus.CoreControl.repository.SaleEntryRepo;
 
 @Service
 public class ReportService {
+
+    @Autowired
+    SaleEntryRepo saleEntryRepo;
 
     private final ReportRepo reportRepo;
     private final ProductService productService;
@@ -57,7 +62,6 @@ public class ReportService {
         EditEntry entry = new EditEntry(type, product, user);
         currentReport.addEntry(entry);
         reportRepo.save(currentReport);
-        System.out.println("Edit entry added to report");
         return entry;
     }
 
@@ -65,7 +69,6 @@ public class ReportService {
         PurchaseEntry entry = new PurchaseEntry(product, user, price, quantity);
         currentReport.addEntry(entry);
         reportRepo.save(currentReport);
-        System.out.println("Purchase entry added to report");
         return entry;
     }
 
@@ -77,11 +80,13 @@ public class ReportService {
         }
         SaleEntry entry = new SaleEntry(productId, user, client, product.getPrice(), quantity);
         product.setStock(product.getStock() - quantity);
-        currentReport.addEntry(entry);
         productService.updateProduct(product);
+
+        SaleEntry savedEntry = saleEntryRepo.save(entry);
+        currentReport.addEntry(savedEntry);
         reportRepo.save(currentReport);
-        System.out.println("Sale entry added to report");
-        return entry;
+
+        return savedEntry;
     }
 
     public boolean isCurrentReportValid(int year, int month) {

@@ -24,11 +24,12 @@
                     <div class="info-container flex column">
                         <div class="product-info-header flex">
                             <h3>Product Info</h3>
-                            <span class="edit-product-btn">
-                                <!-- TODO link to edit form -->
-                                <a th:href="@{/produtos/editar/{productId}(productId=${product.id})}"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                            </span>
+                            <th:block th:if="${validUser}">
+                                <span class="edit-product-btn">
+                                    <a th:href="@{/produtos/editar/{productId}(productId=${product.id})}"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+                                </span>
+                            </th:block>
                         </div>
                         <div class="info-row">
                             <span>Id:</span>
@@ -89,23 +90,25 @@
                         </div>
 
                     </div>
-                    <div class="storage-info-row">
-                        <!-- TODO criar methods para cada função gerada aqui -->
-                        <button id="add-discount-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
-                            value="addDiscount">Add
-                            discount</button>
-                        <button id="remove-discount-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
-                            value="remDiscount">Remove
-                            discount</button>
-                        <button id="buy-product-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
-                            value="addStock">Buy more</button>
-                        <form th:action="@{/produtos/delete/{id}(productId=${product.id})}" id="delete-product-form"
-                            method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn delete-product-submit"><i
-                                    class="fa-solid fa-trash"></i></button>
-                        </form>
-                    </div>
+                    <th:block th:if="${validUser}">
+                        <div class="storage-info-row">
+                            <!-- TODO criar methods para cada função gerada aqui -->
+                            <button id="add-discount-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
+                                value="addDiscount">Add
+                                discount</button>
+                            <button id="remove-discount-btn" th:data-product-id="${product.id}"
+                                class="btn data-modal-open" value="remDiscount">Remove
+                                discount</button>
+                            <button id="buy-product-btn" th:data-product-id="${product.id}" class="btn data-modal-open"
+                                value="addStock">Buy more</button>
+                            <form th:action="@{/produtos/delete/{id}(productId=${product.id})}" id="delete-product-form"
+                                method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn delete-product-submit"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </th:block>
                 </div>
                 <div class="product-movement-info-container">
                     <div class="wrapper-90 flex column gap-1 align-flex-start">

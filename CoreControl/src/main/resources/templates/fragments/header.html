@@ -16,8 +16,8 @@
         <div class="user_container hider_container">
             <i class="fa-solid fa-user hiden_container_btn"></i>
             <div class="user_nav hidden flex column">
-                <p>Olá, <span>User</span>!</p>
-                <a th:href="@{/users/user/1}">Perfil</a>
+                <p>Olá, <span th:text="${user.firstName}">User</span>!</p>
+                <a th:href="@{/users/user/{id}(id=${user.id})}">Perfil</a>
                 <a th:href="@{/logout}">Logout</a>
             </div>
         </div>

@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.matheus.CoreControl.model.Product;
+import com.matheus.CoreControl.model.User;
 import com.matheus.CoreControl.model.enums.EditType;
+import com.matheus.CoreControl.model.enums.UserRole;
 import com.matheus.CoreControl.service.ProductService;
 import com.matheus.CoreControl.service.ReportService;
+import com.matheus.CoreControl.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,26 +24,30 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 @RequestMapping("/produtos")
+@SuppressWarnings("null")
 public class ProdutoController {
 
     private final ProductService productService;
     private final ReportService reportService;
+    private final UserService userService;
 
-    public ProdutoController(ProductService productService, ReportService reportService) {
+    public ProdutoController(ProductService productService, ReportService reportService, UserService userService) {
         this.productService = productService;
         this.reportService = reportService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
-    public String listProducts(Model model) {
+    public String listProducts(Model model, HttpSession session) {
         model.addAttribute("products", productService.findAllProducts());
         return "products-list";
     }
 
     @GetMapping("/filter/")
-    public String filterProducts(@RequestParam(name = "filter") String filter,
-            @RequestParam(name = "value") String value,
-            Model model) {
+    public String filterProducts(
+            @RequestParam(name = "filter") String filter,
+            @RequestParam(name = "value") String value, Model model) {
+
         switch (filter) {
             case "name":
                 model.addAttribute("products", productService.findAllProductByNameContaining(value));
@@ -80,10 +89,10 @@ public class ProdutoController {
     }
 
     @PostMapping("/salvar")
-    public String saveNewProduct(@ModelAttribute Product entity) {
+    public String saveNewProduct(@ModelAttribute Product entity, Model model) {
         productService.saveProduct(entity);
-        // TODO editar para pegar o id do usuário logado
-        reportService.newEditEntry(EditType.CREATE, entity.getId(), 1L);
+        User user = (User) model.getAttribute("user");
+        reportService.newEditEntry(EditType.CREATE, entity.getId(), user.getId());
         return "redirect:/produtos/";
     }
 
@@ -95,10 +104,13 @@ public class ProdutoController {
     }
 
     @PutMapping("/editar/{productId}")
-    public String submitMovieEdit(@PathVariable Long productId, @ModelAttribute Product product) {
-        // TODO editar para pegar o id do usuário logado
-        productService.saveProduct(product);
-        reportService.newEditEntry(EditType.UPDATE, productId, 1L);
+    public String submitMovieEdit(@PathVariable Long productId, @ModelAttribute Product product, Model model) {
+        User user = (User) model.getAttribute("user");
+        Product oldProduct = productService.findProductById(productId);
+        product.setStock(oldProduct.getStock());
+        product.setDiscount(oldProduct.getDiscount());
+        productService.updateProduct(product);
+        reportService.newEditEntry(EditType.UPDATE, productId, user.getId());
         return "redirect:/produtos/produto/" + productId;
     }
 
@@ -109,6 +121,8 @@ public class ProdutoController {
             Model model) {
 
         Product product = productService.findProductById(productId);
+        User user = (User) model.getAttribute("user");
+
         if (productDiscount == null && productStock == null) {
             System.out.println("No changes to be made");
             return "redirect:/produtos/produto/" + productId;
@@ -121,7 +135,7 @@ public class ProdutoController {
             }
             product.setDiscount(productDiscount);
             productService.updateProduct(product);
-            reportService.newEditEntry(EditType.UPDATE, productId, 1L);
+            reportService.newEditEntry(EditType.UPDATE, productId, user.getId());
             return "redirect:/produtos/produto/" + productId;
         }
 
@@ -133,18 +147,28 @@ public class ProdutoController {
             }
 
             product.setStock(product.getStock() + productStock);
-            // TODO editar para pegar o id do usuário logado
-            reportService.newPurchaseEntry(productId, 1L, product.getPrice(), productStock);
+            reportService.newPurchaseEntry(productId, user.getId(), product.getPrice(), productStock);
             productService.updateProduct(product);
         }
         return "redirect:/produtos/produto/" + productId;
     }
 
     @DeleteMapping("/delete/{productId}")
-    public String deleteProduct(@RequestParam("productId") Long productId) {
+    public String deleteProduct(@RequestParam("productId") Long productId, Model model) {
         productService.deleteProduct(productId);
-        // TODO editar para pegar o id do usuário logado
-        reportService.newEditEntry(EditType.DELETE, productId, 1L);
+        User user = (User) model.getAttribute("user");
+        reportService.newEditEntry(EditType.DELETE, productId, user.getId());
         return "redirect:/produtos/";
+    }
+
+    @ModelAttribute("user")
+    public User user(HttpSession session) {
+        return userService.findUserByLogin((String) session.getAttribute("user"));
+    }
+
+    @ModelAttribute("validUser")
+    public boolean validUser(HttpSession session, Model model) {
+        User user = (User) model.getAttribute("user");
+        return user.getRole().equals(UserRole.ADMIN) || user.getRole().equals(UserRole.SUPERADMIN);
     }
 }

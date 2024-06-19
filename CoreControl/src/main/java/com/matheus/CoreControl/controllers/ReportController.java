@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.matheus.CoreControl.model.Report;
+import com.matheus.CoreControl.model.User;
 import com.matheus.CoreControl.model.enums.EntryType;
 import com.matheus.CoreControl.model.reportEntrys.ReportEntry;
 import com.matheus.CoreControl.service.ReportService;
+import com.matheus.CoreControl.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -24,6 +29,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ReportController {
     @Autowired
     ReportService reportService;
+
+    @Autowired
+    UserService userSerivce;
 
     @GetMapping("/")
     public String showReportList(Model model) {
@@ -79,13 +87,9 @@ public class ReportController {
     public String showFilterForm(@RequestParam(name = "startDate", required = false) String startDate,
             @RequestParam(name = "endDate", required = false) String endDate, Model model) {
 
-        System.out.println(startDate);
-        System.out.println(endDate);
         if (startDate == null && endDate == null) {
-            System.out.println("No date filter provided");
             return "redirect:/reports/";
         }
-        System.out.println("Filtering reports by date");
         LocalDate start = LocalDate.parse(startDate).equals(null) ? LocalDate.now() : LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate).equals(null) ? LocalDate.now().plusMonths(1)
                 : LocalDate.parse(endDate);
@@ -133,5 +137,10 @@ public class ReportController {
             }
         }
         return result.size() == 0 ? entries : result;
+    }
+
+    @ModelAttribute("user")
+    public User user(HttpSession session) {
+        return userSerivce.findUserByLogin((String) session.getAttribute("user"));
     }
 }

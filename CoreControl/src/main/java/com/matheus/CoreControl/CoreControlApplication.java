@@ -19,7 +19,7 @@ public class CoreControlApplication {
 		FilterRegistrationBean<AuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
 
 		registrationBean.setFilter(new AuthenticationFilter());
-		registrationBean.addUrlPatterns("/home/*", "/api/*", "/produtos/*", "/reports/*", "/users/*", "/"); // Add URL
+		registrationBean.addUrlPatterns("/home/*", "/produtos/*", "/reports/*", "/users/*", "/"); // Add URL
 		// patterns to
 		// protect
 

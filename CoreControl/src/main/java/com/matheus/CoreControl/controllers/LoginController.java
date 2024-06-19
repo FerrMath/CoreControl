@@ -36,7 +36,6 @@ public class LoginController {
             Model model, HttpSession session) {
 
         if (userService.validateUser(login, password)) {
-            model.addAttribute("user", login);
             session.setAttribute("user", login);
             return "redirect:/home";
         }

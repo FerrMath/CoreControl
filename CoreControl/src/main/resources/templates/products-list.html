@@ -27,7 +27,9 @@
                     </form>
                 </div>
                 <div class="add-product-container gap-1">
-                    <a th:href="@{/produtos/novo}" class="btn">Add product</a>
+                    <th:block th:if="${validUser}">
+                        <a th:href="@{/produtos/novo}" class="btn">Add product</a>
+                    </th:block>
                     <a th:href="@{/produtos/}" class="btn">Clear Filters</a>
                 </div>
                 <div class="clear-filter-container">
@@ -53,14 +55,14 @@
                         <span th:text="${product.stock}">10</span>
                         <div class="actions table-row-controls">
                             <a th:href="@{produto/{productId}(productId=${product.id})}">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-circle-info"></i>
                             </a>
-                            <form th:action="@{delete/{id}(productId=${product.id})}" method="post">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
-                            </form>
-
-                            <!-- <a th:href="@{/produtos/delete}"><i class="fa-solid fa-trash"></i></a> -->
+                            <th:block th:if="${validUser}">
+                                <form th:action="@{delete/{id}(productId=${product.id})}" method="post">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </th:block>
                         </div>
                     </div>
                 </div>
