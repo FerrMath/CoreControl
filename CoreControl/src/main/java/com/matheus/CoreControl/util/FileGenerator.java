@@ -1,35 +1,23 @@
 package com.matheus.CoreControl.util;
 
-import java.io.File;
-import java.io.StringWriter;
+import com.matheus.CoreControl.model.reportEntrys.ReportEntry;
 import java.util.List;
 
-import com.matheus.CoreControl.model.reportEntrys.ReportEntry;
-import com.opencsv.CSVWriter;
-
 public class FileGenerator {
-    File file;
+    public String csvWritter(List<ReportEntry> entries) {
+        // Generate CSV content here
+        StringBuilder csvBuilder = new StringBuilder();
+        csvBuilder.append("Id,Type,Product Id,User Id,Date,Time\n");
 
-    public String csvWritter(List<ReportEntry> data) {
-        if (data == null) {
-            return null;
+        for (ReportEntry entry : entries) {
+            csvBuilder.append(entry.getId()).append(",")
+                    .append(entry.getType()).append(",")
+                    .append(entry.getProductId()).append(",")
+                    .append(entry.getUserId()).append(",")
+                    .append(entry.getDate()).append(",")
+                    .append(entry.getTime()).append("\n");
         }
-        StringWriter stringWriter = new StringWriter();
-        try (CSVWriter writer = new CSVWriter(stringWriter, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER,
-                CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)) {
-            String[] header = { "Id", "Type", "Product Id", "User Id", "Date", "Time" };
-            writer.writeNext(header);
-            for (ReportEntry object : data) {
-                String[] line = object.getInfo();
-                writer.writeNext(line);
-            }
 
-            String csvContent = stringWriter.toString();
-            return csvContent;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return csvBuilder.toString();
     }
 }

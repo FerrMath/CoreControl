@@ -18,6 +18,7 @@ import jakarta.transaction.Transactional;
 @RestController
 @RequestMapping("/api")
 public class DownloadController {
+
     @Autowired
     private ReportService reportService;
 
@@ -28,11 +29,22 @@ public class DownloadController {
     public ResponseEntity<String> download(@PathVariable("reportId") Long reportId) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=example.csv");
+        headers.add("Content-Type", "text/csv; charset=UTF-8");
+
         Report report = reportService.getReportById(reportId);
+        if (report == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (report.getEntries() == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         String csvContent = fileGenerator.csvWritter(report.getEntries());
         if (csvContent == null) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
         return new ResponseEntity<>(csvContent, headers, HttpStatus.OK);
     }
 }

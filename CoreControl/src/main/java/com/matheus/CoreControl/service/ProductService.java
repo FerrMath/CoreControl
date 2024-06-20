@@ -13,8 +13,21 @@ public class ProductService {
     @Autowired
     private ProductRepo productRepo;
 
+    public List<Product> findAllProducts() {
+        return productRepo.findAll();
+    }
+
     public void deleteProduct(Long id) {
         productRepo.deleteById(id);
+    }
+
+    public void updateProduct(Product product) {
+        if (product == null) {
+            return;
+        }
+        if (productIsValid(product)) {
+            productRepo.save(product);
+        }
     }
 
     public Product findProductById(Long id) {
@@ -47,19 +60,6 @@ public class ProductService {
             product.setDiscount(0.0);
             productRepo.save(product);
         }
-    }
-
-    public void updateProduct(Product product) {
-        if (product == null) {
-            return;
-        }
-        if (productIsValid(product)) {
-            productRepo.save(product);
-        }
-    }
-
-    public List<Product> findAllProducts() {
-        return productRepo.findAll();
     }
 
     public List<Product> findProductsBelowStockMinimun() {

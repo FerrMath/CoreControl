@@ -1,12 +1,9 @@
 package com.matheus.CoreControl.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.matheus.CoreControl.model.Product;
 import com.matheus.CoreControl.model.User;
@@ -18,9 +15,7 @@ import com.matheus.CoreControl.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PutMapping;
+import java.util.List;
 
 @Controller
 @RequestMapping("/produtos")
@@ -38,62 +33,53 @@ public class ProdutoController {
     }
 
     @GetMapping("/")
-    public String listProducts(Model model, HttpSession session) {
-        model.addAttribute("products", productService.findAllProducts());
-        return "products-list";
+    @ResponseBody
+    public List<Product> listProducts(Model model, HttpSession session) {
+        return productService.findAllProducts();
     }
 
     @GetMapping("/filter/")
-    public String filterProducts(
+    @ResponseBody
+    public List<Product> filterProducts(
             @RequestParam(name = "filter") String filter,
             @RequestParam(name = "value") String value, Model model) {
 
         switch (filter) {
             case "name":
-                model.addAttribute("products", productService.findAllProductByNameContaining(value));
-                break;
+                return productService.findAllProductByNameContaining(value);
             case "category":
-                model.addAttribute("products", productService.findAllByCategoryContaining(value));
-                break;
+                return productService.findAllByCategoryContaining(value);
             default:
                 // Optional: Add a message or handle the default case differently
-                model.addAttribute("message", "No matching filter found.");
-                break;
+                return null;
         }
-        return "products-list";
     }
 
     @GetMapping("/close-to-min-stock")
-    public String listProductsCloseToMinStock(Model model) {
-        model.addAttribute("products", productService.findProductsCloseToMinStock());
-        return "products-list";
+    @ResponseBody
+    public List<Product> listProductsCloseToMinStock(Model model) {
+        return productService.findProductsCloseToMinStock();
     }
 
     @GetMapping("/below-min-stock")
-    public String listProductsBelowMinStock(Model model) {
-        model.addAttribute("products", productService.findProductsBelowMinStock());
-        return "products-list";
+    @ResponseBody
+    public List<Product> listProductsBelowMinStock(Model model) {
+        return productService.findProductsBelowMinStock();
     }
 
     @GetMapping("/produto/{productId}")
-    public String displayPorductInfo(@PathVariable Long productId, Model model) {
-        model.addAttribute("product", productService.findProductById(productId));
-        model.addAttribute("entries", reportService.getReportByProductId(productId));
-        return "product";
-    }
-
-    @GetMapping("/novo")
-    public String showPordutctForm(Model model) {
-        model.addAttribute("product", new Product());
-        return "product-form";
+    @ResponseBody
+    public Product displayPorductInfo(@PathVariable Long productId, Model model) {
+        return productService.findProductById(productId);
     }
 
     @PostMapping("/salvar")
+    @ResponseBody
     public String saveNewProduct(@ModelAttribute Product entity, Model model) {
         productService.saveProduct(entity);
         User user = (User) model.getAttribute("user");
         reportService.newEditEntry(EditType.CREATE, entity.getId(), user.getId());
-        return "redirect:/produtos/";
+        return "Product saved successfully";
     }
 
     @GetMapping("/editar/{productId}")
@@ -163,7 +149,8 @@ public class ProdutoController {
 
     @ModelAttribute("user")
     public User user(HttpSession session) {
-        return userService.findUserByLogin((String) session.getAttribute("user"));
+        String userLogin = (String) session.getAttribute("user");
+        return userService.findUserByLogin(userLogin);
     }
 
     @ModelAttribute("validUser")

@@ -14,18 +14,28 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Double minStock;
-    private Double maxStock;
-    private Double cost;
-    private Double profit;
+    private Double minStock = 0.0;
+    private Double maxStock = Double.MAX_VALUE; // Assuming a default value to avoid null
+    private Double cost = 0.0;
+    private Double profit = 0.0;
     @Column(nullable = false)
-    private Double price;
+    private Double price = 0.0;
     private String unitMeasure;
-    private Double unit;
+    private Double unit = 0.0;
     private String description;
     private String category;
-    private Double stock;
-    private Double discount;
+    private Double stock = 0.0;
+    private Double discount = 0.0;
+
+    public Product() {
+    }
+
+    public Product(Long id, String name, Double price, Double stock) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+    }
 
     public Double getPrice() {
         double effectiveCost = (cost != null) ? cost : 0.0;
