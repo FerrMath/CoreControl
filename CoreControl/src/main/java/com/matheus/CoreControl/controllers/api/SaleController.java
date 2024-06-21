@@ -30,12 +30,14 @@ public class SaleController {
             @RequestParam(name = "clientId") Long clientId,
             @RequestParam(name = "quantity") Double quantity) {
 
-        User user = userService.findUserById(userId);
+        User user = userService.findUserByLogin("admin");
         if (user == null) {
+            System.out.println("User not found");
             return ResponseEntity.badRequest().build();
         }
         SaleEntry entry = reportService.newSaleEntry(productId, userId, clientId, quantity);
         if (entry == null) {
+            System.out.println("Error creating sale entry");
             return ResponseEntity.badRequest().build();
         }
         return new ResponseEntity<>(entry, HttpStatus.CREATED);

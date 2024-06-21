@@ -1,6 +1,5 @@
 package com.matheus.CoreControl.controllers;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,6 @@ import com.matheus.CoreControl.service.ReportService;
 import com.matheus.CoreControl.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/produtos")
@@ -33,22 +30,29 @@ public class ProdutoController {
     }
 
     @GetMapping("/")
-    @ResponseBody
-    public List<Product> listProducts(Model model, HttpSession session) {
-        return productService.findAllProducts();
+    public String listProducts(Model model, HttpSession session) {
+        model.addAttribute("products", productService.findAllProducts());
+        return "products-list";
+    }
+
+    @GetMapping("/novo")
+    public String showPordutctForm(Model model) {
+        model.addAttribute("product", new Product());
+        return "product-form";
     }
 
     @GetMapping("/filter/")
-    @ResponseBody
-    public List<Product> filterProducts(
+    public String filterProducts(
             @RequestParam(name = "filter") String filter,
             @RequestParam(name = "value") String value, Model model) {
 
         switch (filter) {
             case "name":
-                return productService.findAllProductByNameContaining(value);
+                model.addAttribute("products", productService.findAllProductByNameContaining(value));
+                return "products-list";
             case "category":
-                return productService.findAllByCategoryContaining(value);
+                model.addAttribute("products", productService.findAllProductByNameContaining(value));
+                return "products-list";
             default:
                 // Optional: Add a message or handle the default case differently
                 return null;
@@ -56,30 +60,31 @@ public class ProdutoController {
     }
 
     @GetMapping("/close-to-min-stock")
-    @ResponseBody
-    public List<Product> listProductsCloseToMinStock(Model model) {
-        return productService.findProductsCloseToMinStock();
+    public String listProductsCloseToMinStock(Model model) {
+
+        model.addAttribute("products", productService.findProductsCloseToMinStock());
+        return "products-list";
     }
 
     @GetMapping("/below-min-stock")
-    @ResponseBody
-    public List<Product> listProductsBelowMinStock(Model model) {
-        return productService.findProductsBelowMinStock();
+    public String listProductsBelowMinStock(Model model) {
+        model.addAttribute("products", productService.findProductsBelowMinStock());
+        return "products-list";
     }
 
     @GetMapping("/produto/{productId}")
-    @ResponseBody
-    public Product displayPorductInfo(@PathVariable Long productId, Model model) {
-        return productService.findProductById(productId);
+    public String displayPorductInfo(@PathVariable Long productId, Model model) {
+        model.addAttribute("product", productService.findProductById(productId));
+        model.addAttribute("entries", reportService.getReportByProductId(productId));
+        return "product";
     }
 
     @PostMapping("/salvar")
-    @ResponseBody
     public String saveNewProduct(@ModelAttribute Product entity, Model model) {
         productService.saveProduct(entity);
         User user = (User) model.getAttribute("user");
         reportService.newEditEntry(EditType.CREATE, entity.getId(), user.getId());
-        return "Product saved successfully";
+        return "redirect:/produtos/";
     }
 
     @GetMapping("/editar/{productId}")
